@@ -8,7 +8,7 @@ namespace Assets.Scripts.Plants
 {
     public abstract class PlantBase
     {
-        //implement Factory<T>
+        //implement Factory<T> with Generics.
         //Strawberry strawberry = PlantBase.Create<Strawberry>();
         public abstract int GrowthTime { get;}
         public abstract int TileSize { get; }

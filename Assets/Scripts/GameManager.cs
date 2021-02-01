@@ -195,8 +195,6 @@ public class GameManager : MonoBehaviour
 
     public void OnMarketClick()
     {
-        //Image image = this.MarketCanvas.GetComponent<Image>();
-
         if(this.MarketCanvas.enabled)
         {
             this.MarketCanvas.GetComponent<Canvas>().enabled = false;
