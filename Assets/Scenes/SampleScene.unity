@@ -1259,12 +1259,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0667ffb42f5f7b248920c32229c3035d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DayText: {fileID: 0}
+  DayText: {fileID: 47393384}
   DayCount: 0
   completedDay: 1
   grid: {fileID: 1250085650}
   _farmMap: {fileID: 341169772}
-  _farmTile: {fileID: 11400000, guid: 96b3ccb54d0035b469dd93f054d0187b, type: 2}
+  _farmTile: {fileID: 11400000, guid: 2e15e48e0ac62a64996c99cea8773174, type: 2}
   _selectorMap: {fileID: 2032551037}
   _selectionTile: {fileID: 11400000, guid: 6b24c075f41606c4ba27293224a7eda5, type: 2}
   _plantMap: {fileID: 863358383}
