@@ -14,15 +14,15 @@ namespace Assets.Scripts.SmartTiles
         protected Vector3Int Position { get { return this._position; } set { this._position = value; } }
         private Tile _tile;
         protected Tile Tile { get { return this._tile; } set { this._tile = value; } }
-
-        public SmartTileBase()
-        {
-
-        }
-
         public Tile GetTile() { return this._tile; }
         public Tile SetTile(Tile newTile) { this._tile = newTile; return this._tile; }
         public Vector3Int GetPosition() { return this._position; }
-        
+
+        public SmartTileBase() { }
+        public SmartTileBase(Vector3Int currentPostion, Tile tile)
+        {
+            this.Tile = tile;
+            this.Position = currentPostion;
+        }
     }
 }

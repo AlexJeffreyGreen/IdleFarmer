@@ -8,12 +8,9 @@ using UnityEngine.Tilemaps;
 
 namespace Assets.Scripts.SmartTiles
 {
-    public class BasicFarmTile : SmartTileBase
+    public class GrassTile : SmartTileBase
     {
-        public BasicFarmTile(Vector3Int currentPostion, Tile tile)
-        {
-            this.Tile = tile;
-            this.Position = currentPostion;
-        }
+        public GrassTile() { }
+        public GrassTile(Vector3Int currentPostion, Tile tile) : base(currentPostion, tile) { }
     }
 }

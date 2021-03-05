@@ -2,7 +2,7 @@
 //using Assets.Scripts;
 using Assets.Scripts;
 using Assets.Scripts.SmartTiles;
-using Assets.Scripts.Tiles;
+//using Assets.Scripts.Tiles;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     public Tile _selectionTile;
     public Tilemap _plantMap;
     public Tile _hoedGrassTile;
-    public FarmTile_GrassTile FarmTile_GrassTile;
 
     //CAMERA AND CANVAS
     public Camera _mainCamera;
@@ -80,29 +79,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-        //Debug.Log(this.MarketCanvas);
-        
-
-
         for(int x = 0; x < xVar; x++)
         {
             for(int y = 0; y < xVar; y++)
             {
                 CreateNewTileAt(TileType.GRASS, x, y);
-                //Debug.Log(this._farmMap.GetTile(new Vector3Int(x, y, 0)));
             }
         }
-
-
-        //for(int x = xVar; x > 0; x--)
-        //{
-        //    for(int y = yVar; y > 0; y--)
-        //    {
-        //        CreateNewTileAt(TileType.GRASS, x, y);
-        //        Debug.Log(this._farmMap.GetTile(new Vector3Int(x, y, 0)));
-        //    }
-        //}
-
 
         _mainCamera.transform.position = new Vector3(0, 2.5f, _mainCamera.transform.position.z);
 
@@ -114,9 +97,7 @@ public class GameManager : MonoBehaviour
         Vector3Int p = new Vector3Int(x, y, z);
         if(type == TileType.GRASS)
         {
-            //FarmTile_GrassTile grassTile = Instantiate<FarmTile_GrassTile>(FarmTile_GrassTile);// new FarmTile_GrassTile(p); //Instantiate(this._farmTile, ) as FarmTile_GrassTile; 
-            //_farmMap.SetTile(p, grassTile.GetTile());
-            BasicFarmTile newTile = new BasicFarmTile(p, this._farmTile);
+            GrassTile newTile = SmartTileFactory.Create<GrassTile>(p, this._farmTile);
 
             this._farmGrassTiles.TileCollection.Add(Guid.NewGuid(),newTile);
 
@@ -154,14 +135,14 @@ public class GameManager : MonoBehaviour
             }
 
             _selectorMap.SetTile(gridPos, _selectionTile);
-            //_selectorMap.SetTileFlags(gridPos, TileFlags.)
 
             if(Input.GetMouseButtonDown(0))
             {
                 if(!_plantMap.HasTile(gridPos))
                 {
                     Debug.Log($"Adding Tile at Position... {gridPos}");
-                    BasicFarmTile tile = new BasicFarmTile(gridPos, this._hoedGrassTile);
+
+                    GrassTile tile = SmartTileFactory.Create<GrassTile>(gridPos, this._hoedGrassTile);
                     this.SeedingTiles.TileCollection.Add(Guid.NewGuid(), tile);
                     _plantMap.SetTile(gridPos, tile.GetTile());
                 }
@@ -198,7 +179,6 @@ public class GameManager : MonoBehaviour
         if(this.MarketCanvas.enabled)
         {
             this.MarketCanvas.GetComponent<Canvas>().enabled = false;
-            //image.enabled = false;
             Debug.Log("Leaving the Market!");
         }
         else
@@ -206,7 +186,6 @@ public class GameManager : MonoBehaviour
             this.MarketCanvas.GetComponent<Canvas>().enabled = true;
             if(this.SeedsAndPlantsCanvas.enabled)
                 this.SeedsAndPlantsCanvas.GetComponent<Canvas>().enabled = false;
-            //image.enabled = true;
             Debug.Log("Welcome to the Market!");
         }
     }
@@ -233,6 +212,7 @@ public class GameManager : MonoBehaviour
     }
 
 
+    //TODO:: Make async
     public void CheckTilesDaily()
     {
 
@@ -243,17 +223,12 @@ public class GameManager : MonoBehaviour
         {
               
                  completedDay = false;
-                
-
-                 //Debug.Log("Checking Tiles...");
 
                  foreach(KeyValuePair<Guid, SmartTileBase> farmTiles in this.SeedingTiles.TileCollection)
                      Debug.Log($"Checking Seedling Tile! - {farmTiles.Key}");
 
-                 //Debug.Log("Done.");
                  completedDay = true;
                  DayCount++;
-                 //this.DayText.text += $" {DayCount}";
 
                  this.IncrementDay();
              
