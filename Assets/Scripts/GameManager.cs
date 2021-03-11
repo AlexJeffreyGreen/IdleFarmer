@@ -168,6 +168,17 @@ public class GameManager : MonoBehaviour
                     Debug.Log(keyValuePair.Value.GetTile().name);
                 }
             }
+            if(Input.GetMouseButton(0))
+            {
+                Debug.Log($"Hold - {gridPos} ");
+                //while mouse is held down
+                //move selector and do not delete selector at previous tile
+                //draw new tile for tilled grass
+            }
+            else
+            {
+                //clear?
+            }
         }
         else
         {
