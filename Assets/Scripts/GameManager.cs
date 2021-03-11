@@ -24,13 +24,16 @@ public class GameManager : MonoBehaviour
     public TileMapperCollection SeedingTiles { get { return this._seedlingTiles; } }
 
     //TILES AND MAPS
-    public Grid grid;
-    public Tilemap _farmMap;
-    public Tile _farmTile;
-    public Tilemap _selectorMap;
-    public Tile _selectionTile;
-    public Tilemap _plantMap;
-    public Tile _hoedGrassTile;
+    //public Grid grid;
+   // public Tilemap _farmMap;
+   // public Tile _farmTile;
+   // public Tilemap _selectorMap;
+   // public Tile _selectionTile;
+   // public Tilemap _plantMap;
+   // public Tile _hoedGrassTile;
+
+    public Tile[] Tiles;
+    public Tilemap[] TileMaps;
 
     //CAMERA AND CANVAS
     public Camera _mainCamera;
@@ -97,11 +100,11 @@ public class GameManager : MonoBehaviour
         Vector3Int p = new Vector3Int(x, y, z);
         if(type == TileType.GRASS)
         {
-            GrassTile newTile = SmartTileFactory.Create<GrassTile>(p, this._farmTile);
+            GrassTile newTile = SmartTileFactory.Create<GrassTile>(p, Tiles[TileType.GRASS.ToInt()]);
 
             this._farmGrassTiles.TileCollection.Add(Guid.NewGuid(),newTile);
 
-            this._farmMap.SetTile(p, newTile.GetTile());
+            TileMaps[TileMapType.GRASS.ToInt()].SetTile(p, newTile.GetTile());
         }
     }
 
@@ -125,26 +128,26 @@ public class GameManager : MonoBehaviour
     private void TileMovement()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int gridPos = _farmMap.WorldToCell(mousePos);
-        if(_farmMap.HasTile(gridPos))
+        Vector3Int gridPos = TileMaps[TileMapType.GRASS.ToInt()].WorldToCell(mousePos);
+        if(TileMaps[0].HasTile(gridPos))
         {
             if(this._currentPos != gridPos)
             {
-                _selectorMap.SetTile(this._currentPos, null);
+                TileMaps[TileMapType.SELECTOR.ToInt()].SetTile(this._currentPos, null);
                 this._currentPos = gridPos;
             }
 
-            _selectorMap.SetTile(gridPos, _selectionTile);
+            TileMaps[TileMapType.SELECTOR.ToInt()].SetTile(gridPos, Tiles[TileType.SELECTOR.ToInt()]);
 
             if(Input.GetMouseButtonDown(0))
             {
-                if(!_plantMap.HasTile(gridPos))
+                if(!TileMaps[TileMapType.TILLED.ToInt()].HasTile(gridPos))
                 {
                     Debug.Log($"Adding Tile at Position... {gridPos}");
 
-                    GrassTile tile = SmartTileFactory.Create<GrassTile>(gridPos, this._hoedGrassTile);
+                    GrassTile tile = SmartTileFactory.Create<GrassTile>(gridPos, Tiles[TileType.TILLED.ToInt()]);
                     this.SeedingTiles.TileCollection.Add(Guid.NewGuid(), tile);
-                    _plantMap.SetTile(gridPos, tile.GetTile());
+                    TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, tile.GetTile());
                 }
                 else
                 {
@@ -153,7 +156,7 @@ public class GameManager : MonoBehaviour
                     {
                         Debug.Log($"Removing Tile at Position... {gridPos}");
                         SeedingTiles.TileCollection.Remove(tileAtPosition.Key);
-                        _plantMap.SetTile(gridPos, null);
+                        TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, null);
                     }
                 }
 
@@ -168,7 +171,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            _selectorMap.ClearAllTiles();
+            TileMaps[TileMapType.SELECTOR.ToInt()].ClearAllTiles();
         }
     }
 
@@ -210,8 +213,6 @@ public class GameManager : MonoBehaviour
         }
         //Debug.Log("Plants and Seeds UI.");
     }
-
-
     //TODO:: Make async
     public void CheckTilesDaily()
     {
