@@ -1,6 +1,7 @@
 ﻿//using Assets.Scripts;
 //using Assets.Scripts;
 using Assets.Scripts;
+using Assets.Scripts.Plants;
 using Assets.Scripts.SmartTiles;
 //using Assets.Scripts.Tiles;
 using System;
@@ -157,6 +158,14 @@ public class GameManager : MonoBehaviour
                         Debug.Log($"Removing Tile at Position... {gridPos}");
                         SeedingTiles.TileCollection.Remove(tileAtPosition.Key);
                         TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, null);
+
+                        //
+                        // Basic Test / Proof of adding different tiles instead of the tilled soil tile.
+                        //
+                        FruitTile tile = SmartTileFactory.Create<FruitTile>(gridPos, Tiles[TileType.TILLED.ToInt()]);
+                        Debug.Log($"Replacing Tile with Fruit Tile - Test");
+                        SeedingTiles.TileCollection.Add(Guid.NewGuid(), tile);
+                        TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, tile.GetTile());
                     }
                 }
 
@@ -167,13 +176,6 @@ public class GameManager : MonoBehaviour
                     Debug.Log($"Found Tile at Position {gridPos} - Id - {keyValuePair.Key}");
                     Debug.Log(keyValuePair.Value.GetTile().name);
                 }
-            }
-            if(Input.GetMouseButton(0))
-            {
-                Debug.Log($"Hold - {gridPos} ");
-                //while mouse is held down
-                //move selector and do not delete selector at previous tile
-                //draw new tile for tilled grass
             }
             else
             {
@@ -224,6 +226,11 @@ public class GameManager : MonoBehaviour
         }
         //Debug.Log("Plants and Seeds UI.");
     }
+
+    public void SeedButtonClick()
+    {
+        Debug.Log("Seed Click");
+    }
     //TODO:: Make async
     public void CheckTilesDaily()
     {
@@ -233,18 +240,37 @@ public class GameManager : MonoBehaviour
 
         if(completedDay == true)
         {
-              
-                 completedDay = false;
 
-                 foreach(KeyValuePair<Guid, SmartTileBase> farmTiles in this.SeedingTiles.TileCollection)
-                     Debug.Log($"Checking Seedling Tile! - {farmTiles.Key}");
+            completedDay = false;
 
-                 completedDay = true;
-                 DayCount++;
+            foreach(KeyValuePair<Guid, SmartTileBase> farmTiles in this.SeedingTiles.TileCollection)
+            {
+                Debug.Log($"Checking Seedling Tile! - {farmTiles.Key}");
+               // Type t = farmTiles.Value.GetType();
 
-                 this.IncrementDay();
-             
-             
+                switch(farmTiles.Value)
+                {
+                    case GrassTile gT:
+                        break;
+                    case BerryTile bT:
+                        break;
+                    case FruitTile fT:
+                        Debug.Log($"Fruit Tile Found! - {farmTiles.Value.GetPosition()}");
+                        break;
+                    case VeggieTile vT:
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+            completedDay = true;
+            DayCount++;
+
+            this.IncrementDay();
+
+
         }
         else
             return;
