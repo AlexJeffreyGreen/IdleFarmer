@@ -2,6 +2,8 @@
 //using Assets.Scripts;
 using Assets.Scripts;
 using Assets.Scripts.Plants;
+using Assets.Scripts.Plants.Fruit;
+using Assets.Scripts.Plants.Vegtable;
 using Assets.Scripts.SmartTiles;
 //using Assets.Scripts.Tiles;
 using System;
@@ -23,15 +25,6 @@ public class GameManager : MonoBehaviour
 
     private TileMapperCollection _seedlingTiles;
     public TileMapperCollection SeedingTiles { get { return this._seedlingTiles; } }
-
-    //TILES AND MAPS
-    //public Grid grid;
-   // public Tilemap _farmMap;
-   // public Tile _farmTile;
-   // public Tilemap _selectorMap;
-   // public Tile _selectionTile;
-   // public Tilemap _plantMap;
-   // public Tile _hoedGrassTile;
 
     public Tile[] Tiles;
     public Tilemap[] TileMaps;
@@ -99,6 +92,7 @@ public class GameManager : MonoBehaviour
     private void CreateNewTileAt(TileType type, int x, int y, int z = 0)
     {
         Vector3Int p = new Vector3Int(x, y, z);
+
         if(type == TileType.GRASS)
         {
             GrassTile newTile = SmartTileFactory.Create<GrassTile>(p, Tiles[TileType.GRASS.ToInt()]);
@@ -246,8 +240,7 @@ public class GameManager : MonoBehaviour
             foreach(KeyValuePair<Guid, SmartTileBase> farmTiles in this.SeedingTiles.TileCollection)
             {
                 Debug.Log($"Checking Seedling Tile! - {farmTiles.Key}");
-               // Type t = farmTiles.Value.GetType();
-
+               
                 switch(farmTiles.Value)
                 {
                     case GrassTile gT:

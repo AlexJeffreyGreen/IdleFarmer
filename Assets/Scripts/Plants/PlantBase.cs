@@ -16,6 +16,8 @@ namespace Assets.Scripts.Plants
         public abstract string Name { get; }
         public abstract double PricePerSeed { get; }
         public abstract double PricePerHarvest { get; }
+        
+        public abstract List<Sprite> GrowthSprites();
 
         public PlantBase() { }
         public PlantBase(Vector3Int currentPostion, Tile tile) : base(currentPostion, tile) { }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Assets.Scripts.Plants
+namespace Assets.Scripts.Plants.Fruit
 {
-    public class FruitTile : PlantBase
+    public class BerryTile : PlantBase
     {
         public override int GrowthTime => throw new NotImplementedException();
 
@@ -19,8 +19,13 @@ namespace Assets.Scripts.Plants
         public override double PricePerSeed => throw new NotImplementedException();
 
         public override double PricePerHarvest => throw new NotImplementedException();
+        public override List<Sprite> GrowthSprites()
+        {
+            throw new NotImplementedException();
+        }
 
-        public FruitTile() { }
-        public FruitTile(Vector3Int currentPostion, Tile tile) : base(currentPostion, tile) { }
+        public BerryTile() { }
+
+        public BerryTile(Vector3Int currentPostion, Tile tile) : base(currentPostion, tile) { }
     }
 }
