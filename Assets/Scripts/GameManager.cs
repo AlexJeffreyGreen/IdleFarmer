@@ -2,8 +2,6 @@
 //using Assets.Scripts;
 using Assets.Scripts;
 using Assets.Scripts.Plants;
-using Assets.Scripts.Plants.Fruit;
-using Assets.Scripts.Plants.Vegtable;
 using Assets.Scripts.SmartTiles;
 //using Assets.Scripts.Tiles;
 using System;
@@ -65,6 +63,9 @@ public class GameManager : MonoBehaviour
 
         this._farmGrassTiles = new TileMapperCollection();
         this._seedlingTiles = new TileMapperCollection();
+
+        //Deserialize seed collection
+        //build up seed bag
 
     }
 
@@ -153,13 +154,13 @@ public class GameManager : MonoBehaviour
                         SeedingTiles.TileCollection.Remove(tileAtPosition.Key);
                         TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, null);
 
-                        //
-                        // Basic Test / Proof of adding different tiles instead of the tilled soil tile.
-                        //
-                        FruitTile tile = SmartTileFactory.Create<FruitTile>(gridPos, Tiles[TileType.TILLED.ToInt()]);
-                        Debug.Log($"Replacing Tile with Fruit Tile - Test");
-                        SeedingTiles.TileCollection.Add(Guid.NewGuid(), tile);
-                        TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, tile.GetTile());
+                        ////
+                        //// Basic Test / Proof of adding different tiles instead of the tilled soil tile.
+                        ////
+                        //FruitTile tile = SmartTileFactory.Create<FruitTile>(gridPos, Tiles[TileType.TILLED.ToInt()]);
+                        //Debug.Log($"Replacing Tile with Fruit Tile - Test");
+                        //SeedingTiles.TileCollection.Add(Guid.NewGuid(), tile);
+                        //TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, tile.GetTile());
                     }
                 }
 
@@ -241,20 +242,20 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log($"Checking Seedling Tile! - {farmTiles.Key}");
                
-                switch(farmTiles.Value)
-                {
-                    case GrassTile gT:
-                        break;
-                    case BerryTile bT:
-                        break;
-                    case FruitTile fT:
-                        Debug.Log($"Fruit Tile Found! - {farmTiles.Value.GetPosition()}");
-                        break;
-                    case VeggieTile vT:
-                        break;
-                    default:
-                        break;
-                }
+                //switch(farmTiles.Value)
+                //{
+                //    case GrassTile gT:
+                //        break;
+                //    case BerryTile bT:
+                //        break;
+                //    case FruitTile fT:
+                //        Debug.Log($"Fruit Tile Found! - {farmTiles.Value.GetPosition()}");
+                //        break;
+                //    case VeggieTile vT:
+                //        break;
+                //    default:
+                //        break;
+                //}
 
             }
 

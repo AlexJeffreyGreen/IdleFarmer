@@ -1,0 +1,23 @@
+{
+  "SeedCollection": [
+    {
+      "SpriteCollection": [
+        {
+          "Seed_Sprite": {
+            "Id": 0,
+            "Path": "~\\Assets\\Sprites\\Plants\\strawberry_seed_planeted.png"
+          }
+        }
+      ],
+      "Gestation_Period": 1,
+      "Price_Per_Seed": 1.0,
+      "Price_At_Harvest": 10.0,
+      "Percentage_Of_Lucky": 10.0,
+      "Tile_Size": 1,
+      "Seed_Type": {
+        "Name": "Fruit"
+      },
+      "Name": "Strawberry"
+    }
+  ]
+}
