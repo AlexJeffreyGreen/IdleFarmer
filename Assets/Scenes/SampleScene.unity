@@ -1276,6 +1276,7 @@ MonoBehaviour:
   xVar: 10
   yVar: 10
   TileType: 0
+  SeedJson: {fileID: 4900000, guid: d8b6d1d4f1819d14ba3bfc977c44a1ab, type: 3}
 --- !u!4 &1140355822
 Transform:
   m_ObjectHideFlags: 0

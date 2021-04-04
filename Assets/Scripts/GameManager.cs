@@ -2,6 +2,7 @@
 //using Assets.Scripts;
 using Assets.Scripts;
 using Assets.Scripts.Plants;
+using Assets.Scripts.SeedManager;
 using Assets.Scripts.SmartTiles;
 //using Assets.Scripts.Tiles;
 using System;
@@ -44,8 +45,16 @@ public class GameManager : MonoBehaviour
     public System.Random Random;
     public TileType TileType;
 
+    //Text
+    public TextAsset SeedJson;
+
     private void Awake()
     {
+
+        SeedDeserializer deserializer = new SeedDeserializer(SeedJson);
+        deserializer.DeserializationTest();
+
+
         if(DayCount == 0)
             DayCount++;
 
@@ -238,26 +247,26 @@ public class GameManager : MonoBehaviour
 
             completedDay = false;
 
-            foreach(KeyValuePair<Guid, SmartTileBase> farmTiles in this.SeedingTiles.TileCollection)
-            {
-                Debug.Log($"Checking Seedling Tile! - {farmTiles.Key}");
+            //foreach(KeyValuePair<Guid, SmartTileBase> farmTiles in this.SeedingTiles.TileCollection)
+            //{
+            //    Debug.Log($"Checking Seedling Tile! - {farmTiles.Key}");
                
-                //switch(farmTiles.Value)
-                //{
-                //    case GrassTile gT:
-                //        break;
-                //    case BerryTile bT:
-                //        break;
-                //    case FruitTile fT:
-                //        Debug.Log($"Fruit Tile Found! - {farmTiles.Value.GetPosition()}");
-                //        break;
-                //    case VeggieTile vT:
-                //        break;
-                //    default:
-                //        break;
-                //}
+            //    //switch(farmTiles.Value)
+            //    //{
+            //    //    case GrassTile gT:
+            //    //        break;
+            //    //    case BerryTile bT:
+            //    //        break;
+            //    //    case FruitTile fT:
+            //    //        Debug.Log($"Fruit Tile Found! - {farmTiles.Value.GetPosition()}");
+            //    //        break;
+            //    //    case VeggieTile vT:
+            //    //        break;
+            //    //    default:
+            //    //        break;
+            //    //}
 
-            }
+            //}
 
             completedDay = true;
             DayCount++;

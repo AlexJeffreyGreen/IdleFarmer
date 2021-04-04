@@ -8,6 +8,6 @@ namespace Assets.Scripts.Plants
 {
     public class SeedCollection
     {
-        public Seed[] Seeds { get; set; }
+        public Seed[] Seed { get; set; }
     }
 }

@@ -14,8 +14,9 @@ namespace Assets.Scripts.Plants
         public float Price_At_Harvest { get; set; }
         public float Percentage_Of_Lucky { get; set; }
         public int Tile_Size { get; set; }
-        public Type Type { get; set; }
+        public SeedType SeedType { get; set; }
         public string Name { get; set; }
     }
+
 
 }
