@@ -48,11 +48,16 @@ public class GameManager : MonoBehaviour
     //Text
     public TextAsset SeedJson;
 
+    //Farmer Player
+    public FarmerPlayer Player1; //TODO - Dream to implement lobby and multiplayer
+
     private void Awake()
     {
 
         SeedDeserializer deserializer = new SeedDeserializer(SeedJson);
         deserializer.DeserializationTest();
+
+        //this.Player1 = this.Player1.GetComponent<FarmerPlayer>();
 
 
         if(DayCount == 0)
