@@ -15,18 +15,21 @@ namespace Assets.Scripts.SeedManager
         public Dictionary<Guid, PlantBase> PlantObjects = new Dictionary<Guid, PlantBase>();
         private TextAsset textFile;
 
-        public SeedDeserializer(TextAsset textFile)
+        public SeedDeserializer()
         {
-            this.textFile = textFile;
+            //textFile = text;
         }
 
-        public SeedCollection DeserializationTest()
+        public SeedCollection DeserializeSeeds()
         {
             SeedCollection seeds = null;
             try
             {
-                seeds = Newtonsoft.Json.JsonConvert.DeserializeObject<SeedCollection>(this.textFile.text);
-
+                using(StreamReader r = new StreamReader("Assets//Scripts//Data//SeedData.json"))
+                {
+                    string json = r.ReadToEnd();
+                    seeds = Newtonsoft.Json.JsonConvert.DeserializeObject<SeedCollection>(json);
+                }
             }
             catch(Exception e)
             {

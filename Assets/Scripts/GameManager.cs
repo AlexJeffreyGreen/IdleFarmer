@@ -53,11 +53,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
-        SeedDeserializer deserializer = new SeedDeserializer(SeedJson);
-        deserializer.DeserializationTest();
-
+        
+        //SeedDeserializer deserializer = new SeedDeserializer(SeedJson);
+        //SeedCollection currentCollection = deserializer.DeserializationTest();
         //this.Player1 = this.Player1.GetComponent<FarmerPlayer>();
+
+        //Debug.Log(Player1.ToString());
 
 
         if(DayCount == 0)
