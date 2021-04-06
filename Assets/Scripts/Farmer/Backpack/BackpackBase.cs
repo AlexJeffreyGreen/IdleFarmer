@@ -13,7 +13,7 @@ namespace Assets.Scripts.Farmer.Backpack
         public abstract int MaxSeeds();
         private List<Seed> _seeds;
 
-        public Backpack()
+        public BackpackBase()
         {
             //_maxSeeds = 12; // currently hard coded. Different Backpacks will be able to store more seeds.
             _seeds = this.RetrieveSeeds();
