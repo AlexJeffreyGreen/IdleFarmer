@@ -57,13 +57,14 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        
+
         //SeedDeserializer deserializer = new SeedDeserializer(SeedJson);
         //SeedCollection currentCollection = deserializer.DeserializationTest();
         //this.Player1 = this.Player1.GetComponent<FarmerPlayer>();
 
         //Debug.Log(Player1.ToString());
 
+        this.Tiles  = SeedManager.Manager.RetrieveAllTiles();
 
         if(DayCount == 0)
             DayCount++;

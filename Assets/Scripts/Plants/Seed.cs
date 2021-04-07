@@ -8,7 +8,7 @@ namespace Assets.Scripts.Plants
 {
     public class Seed
     {
-        public SpriteCollection[] SpriteCollection { get; set; }
+        public SpriteCollection SpriteCollection { get; set; }
         public int Gestation_Period { get; set; }
         public float Price_Per_Seed { get; set; }
         public float Price_At_Harvest { get; set; }

@@ -28,6 +28,7 @@ namespace Assets.Scripts.SeedManager
                 using(StreamReader r = new StreamReader("Assets//Scripts//Data//SeedData.json"))
                 {
                     string json = r.ReadToEnd();
+                    //Rootobject o = Newtonsoft.Json.JsonConvert.DeserializeObject<Rootobject>(json);
                     seeds = Newtonsoft.Json.JsonConvert.DeserializeObject<SeedCollection>(json);
                 }
             }
@@ -39,6 +40,3 @@ namespace Assets.Scripts.SeedManager
         }
     }
 }
-
-
-

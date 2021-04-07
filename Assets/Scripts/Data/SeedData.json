@@ -1,61 +1,93 @@
 {
-    "Seed": [
-      {
-        "SpriteCollection": [
+  "Seed": [
+    {
+      "SpriteCollection": {
+        "SeedSprites": [
           {
-            "SeedSprite": {
-              "Id": 0,
-              "Path": "~\\Assets\\Sprites\\Plants\\strawberry_seed_planeted.png"
-            }
+            "Id": 0,
+            "Path": "\\Assets\\Sprites\\Plants\\strawberry_seed_planted.png"
           }
-        ],
-        "Gestation_Period": 1,
-        "Price_Per_Seed": 1.0,
-        "Price_At_Harvest": 10.0,
-        "Percentage_Of_Lucky": 10.0,
-        "Tile_Size": 1,
-        "SeedType": {
-          "Name": "Fruit"
-        },
-        "Name": "Strawberry"
+        ]
       },
-      {
-        "SpriteCollection": [
-          {
-            "SeedSprite": {
-              "Id": 0,
-              "Path": "~\\Assets\\Sprites\\Plants\\strawberry_seed_planeted.png"
-            }
-          }
-        ],
-        "Gestation_Period": 1,
-        "Price_Per_Seed": 1.0,
-        "Price_At_Harvest": 10.0,
-        "Percentage_Of_Lucky": 10.0,
-        "Tile_Size": 1,
-        "SeedType": {
-          "Name": "Fruit"
-        },
-        "Name": "Apple"
+      "Gestation_Period": 1,
+      "Price_Per_Seed": 1.0,
+      "Price_At_Harvest": 10.0,
+      "Percentage_Of_Lucky": 10.0,
+      "Tile_Size": 1,
+      "SeedType": {
+        "Name": "Fruit"
       },
-      {
-        "SpriteCollection": [
+      "Name": "Strawberry"
+    },
+    {
+      "SpriteCollection": {
+        "SeedSprites": [
           {
-            "SeedSprite": {
-              "Id": 0,
-              "Path": "~\\Assets\\Sprites\\Plants\\strawberry_seed_planeted.png"
-            }
+            "Id": 0,
+            "Path": "\\Assets\\Sprites\\Plants\\strawberry_seed_planted.png"
           }
-        ],
-        "Gestation_Period": 1,
-        "Price_Per_Seed": 1.0,
-        "Price_At_Harvest": 10.0,
-        "Percentage_Of_Lucky": 10.0,
-        "Tile_Size": 1,
-        "SeedType": {
-          "Name": "Fruit"
-        },
-        "Name": "Mango"
-      }
-    ]
+        ]
+      },
+      "Gestation_Period": 1,
+      "Price_Per_Seed": 1.0,
+      "Price_At_Harvest": 10.0,
+      "Percentage_Of_Lucky": 10.0,
+      "Tile_Size": 1,
+      "SeedType": {
+        "Name": "Fruit"
+      },
+      "Name": "Apple"
+    },
+    {
+      "SpriteCollection": {
+        "SeedSprites": [
+          {
+            "Id": 0,
+            "Path": "\\Assets\\Sprites\\Plants\\strawberry_seed_planted.png"
+          }
+        ]
+      },
+      "Gestation_Period": 1,
+      "Price_Per_Seed": 1.0,
+      "Price_At_Harvest": 10.0,
+      "Percentage_Of_Lucky": 10.0,
+      "Tile_Size": 1,
+      "SeedType": {
+        "Name": "Fruit"
+      },
+      "Name": "Mango"
+    }
+  ],
+  "UI_Tile": [
+    {
+      "Name": "Grass",
+      "SeedSprites": [
+        {
+          "Id": 0,
+          "Path": "\\Assets\\Sprites\\grass_resize_smaller.png"
+        }
+      ]
+
+    },
+    {
+      "Name": "Tilled",
+      "SeedSprites": [
+        {
+          "Id": 0,
+          "Path": "\\Assets\\Sprites\\hoed_grassTop.png"
+        }
+      ]
+
+    },
+    {
+      "Name": "Selector",
+      "SeedSprites": [
+        {
+          "Id": 0,
+          "Path": "\\Assets\\Sprites\\selection.png"
+        }
+      ]
+
+    }
+  ]
   }
