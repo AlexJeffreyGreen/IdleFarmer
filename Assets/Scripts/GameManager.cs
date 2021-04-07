@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     public Camera _mainCamera;
     public Canvas MarketCanvas;
     public Canvas SeedsAndPlantsCanvas;
+    public Canvas MainButtonCanvas;
+
+    public Image MainTileImage;
+    public Image SeedTileImage;
 
     //GRID SIZING
     public int xVar;
@@ -142,13 +146,8 @@ public class GameManager : MonoBehaviour
         Vector3Int gridPos = TileMaps[TileMapType.GRASS.ToInt()].WorldToCell(mousePos);
         if(TileMaps[0].HasTile(gridPos))
         {
-            if(this._currentPos != gridPos)
-            {
-                TileMaps[TileMapType.SELECTOR.ToInt()].SetTile(this._currentPos, null);
-                this._currentPos = gridPos;
-            }
+            ManageSelectedTileAtPosition(gridPos);
 
-            TileMaps[TileMapType.SELECTOR.ToInt()].SetTile(gridPos, Tiles[TileType.SELECTOR.ToInt()]);
 
             if(Input.GetMouseButtonDown(0))
             {
@@ -168,19 +167,13 @@ public class GameManager : MonoBehaviour
                         Debug.Log($"Removing Tile at Position... {gridPos}");
                         SeedingTiles.TileCollection.Remove(tileAtPosition.Key);
                         TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, null);
-
-                        ////
-                        //// Basic Test / Proof of adding different tiles instead of the tilled soil tile.
-                        ////
-                        //FruitTile tile = SmartTileFactory.Create<FruitTile>(gridPos, Tiles[TileType.TILLED.ToInt()]);
-                        //Debug.Log($"Replacing Tile with Fruit Tile - Test");
-                        //SeedingTiles.TileCollection.Add(Guid.NewGuid(), tile);
-                        //TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, tile.GetTile());
                     }
                 }
 
+                this.ManageCanvasMainTile(gridPos);
 
-                KeyValuePair<Guid,SmartTileBase> keyValuePair = this._farmGrassTiles.GetTileAtPosition(gridPos);
+
+                KeyValuePair<Guid, SmartTileBase> keyValuePair = this._farmGrassTiles.GetTileAtPosition(gridPos);
                 if(keyValuePair.Key != Guid.Empty && keyValuePair.Value != null)
                 {
                     Debug.Log($"Found Tile at Position {gridPos} - Id - {keyValuePair.Key}");
@@ -191,11 +184,51 @@ public class GameManager : MonoBehaviour
             {
                 //clear?
             }
+
+           // ManageCanvasMainTile(gridPos);
         }
         else
         {
             TileMaps[TileMapType.SELECTOR.ToInt()].ClearAllTiles();
         }
+    }
+
+    private void ManageCanvasMainTile(Vector3Int gridPos)
+    {
+        //this.MainTileImage;
+        this.SeedTileImage = this.SeedTileImage.GetComponent<Image>();
+        this.MainTileImage = this.MainTileImage.GetComponent<Image>();
+        //TileBase currentTile = TileMaps[TileMapType.GRASS.ToInt()].GetTile(gridPos);
+        //if(this._currentPos != gridPos)
+        //{
+        KeyValuePair<Guid, SmartTileBase> tileAtPosition = SeedingTiles.GetTileAtPosition(gridPos);
+        if(tileAtPosition.Key != Guid.Empty && tileAtPosition.Value != null)
+        {
+            Tile tile = tileAtPosition.Value.GetTile();
+            if(tile.sprite != null)
+                this.SeedTileImage.sprite = tile.sprite;
+        }
+        else
+        {
+            this.SeedTileImage.sprite = this.MainTileImage.sprite;
+        }
+        //}
+    }
+
+    private void ManageSelectedTileAtPosition(Vector3Int gridPos)
+    {
+        if(this._currentPos != gridPos)
+        {
+            TileMaps[TileMapType.SELECTOR.ToInt()].SetTile(this._currentPos, null);
+
+            this.ManageCanvasMainTile(gridPos);
+
+            this._currentPos = gridPos;
+
+
+        }
+
+        TileMaps[TileMapType.SELECTOR.ToInt()].SetTile(gridPos, Tiles[TileType.SELECTOR.ToInt()]);
     }
 
     private void MenuProcessing() { }
