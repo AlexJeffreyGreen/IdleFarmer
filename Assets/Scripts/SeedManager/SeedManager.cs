@@ -60,7 +60,7 @@ namespace Assets.Scripts.SeedManager
                     Vector2 seedGestationVector2 = new Vector2(0.0f, 0.0f);
                     Sprite seedGestationSprite = Sprite.Create(seedGestationTexture, seedGestationRect, seedGestationVector2, 128.0f); // load sprite based on location in path?
 
-                    Tile seedGestationTile = new Tile();
+                    Tile seedGestationTile = ScriptableObject.CreateInstance<Tile>();// new Tile();
                     seedGestationTile.name = $"{uiTile.Name}";
                     seedGestationTile.sprite = seedGestationSprite;
                     allTiles.Add(seedGestationTile);
@@ -79,7 +79,7 @@ namespace Assets.Scripts.SeedManager
                     Vector2 seedGestationVector2 = new Vector2(0.0f, 0.0f);
                     Sprite seedGestationSprite = Sprite.Create(seedGestationTexture, seedGestationRect, seedGestationVector2, 128.0f); // load sprite based on location in path?
 
-                    Tile seedGestationTile = new Tile();
+                    Tile seedGestationTile = ScriptableObject.CreateInstance<Tile>();// new Tile();
                     seedGestationTile.name = $"{seed.Name}_{seed.SpriteCollection.SeedSprites[i]}";
                     seedGestationTile.sprite = seedGestationSprite;
                     allTiles.Add(seedGestationTile);
