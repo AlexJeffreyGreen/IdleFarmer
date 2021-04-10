@@ -10,7 +10,8 @@ public class FarmingCard : MonoBehaviour
     private Vector3 defaultPosition;
     public float hoveredFixedHeight;
     public float cardFloatSpeed;
-    private Vector3 velocity = Vector3.zero;
+    //private Vector3 velocity = Vector3.zero;
+    private bool selected = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,9 @@ public class FarmingCard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Vector3 tempPosition = new Vector3(this.defaultPosition.x, this.defaultPosition.y + hoveredFixedHeight);
+        //this.Transform.localPosition = tempPosition;//Vector3.SmoothDamp(this.defaultPosition, tempPosition, ref velocity, cardFloatSpeed);//tempPosition;
+        //this.Transform.position = Vector3.MoveTowards(defaultPosition, tempPosition, cardFloatSpeed * Time.deltaTime);
         //if(IsPointerOverGameObject(this.gameObject))
         //{
         //    //Debug.Log("Pointer over object");
@@ -31,7 +35,7 @@ public class FarmingCard : MonoBehaviour
         //    {
         //        Debug.Log("Clicked on Card!");
         //    }
-            
+
         //    //this.rectTransform.Translate(tempPosition * cardFloatSpeed * (Time.deltaTime/2));//transform.Translate(move * speed * Time.deltaTime);
         //}
         //else
@@ -55,19 +59,37 @@ public class FarmingCard : MonoBehaviour
     //    localPosition = new Vector3(localPosition.x, localPosition.y - 50f);
     //    this.rectTransform.localPosition = localPosition;
     //}
+    private void OnMouseDown()
+    {
+        Debug.Log("Mouse click!");
+        selected = !selected;
+        if(!selected)
+        {
+            Vector3 tempPostion = this.defaultPosition;
+            this.Transform.localPosition = tempPostion;
+        }
+    }
 
     private void OnMouseEnter()
     {
         //Debug.Log("Mouse over test");
         Vector3 tempPosition = new Vector3(this.defaultPosition.x, this.defaultPosition.y + hoveredFixedHeight);
         this.Transform.localPosition = tempPosition;//Vector3.SmoothDamp(this.defaultPosition, tempPosition, ref velocity, cardFloatSpeed);//tempPosition;
+        //this.Transform.position = Vector3.MoveTowards(defaultPosition, tempPosition, cardFloatSpeed * Time.deltaTime);
     }
+
 
     private void OnMouseExit()
     {
-        //Debug.Log("Mouse exit test");
-        Vector3 tempPostion = this.defaultPosition;
-        this.Transform.localPosition = tempPostion;
+        if(!selected)
+        {
+            //Debug.Log("Mouse exit test");
+            //float step = cardFloatSpeed * Time.deltaTime;
+            //this.Transform.position = Vector3.MoveTowards(this.Transform.localPosition, this.defaultPosition, step);
+
+            Vector3 tempPostion = this.defaultPosition;
+            this.Transform.localPosition = tempPostion;
+        }
     }
 
     public static bool IsPointerOverGameObject(GameObject gameObject)

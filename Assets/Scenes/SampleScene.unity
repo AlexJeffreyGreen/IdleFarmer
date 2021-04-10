@@ -891,9 +891,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentHand: []
-  FarmingCardGeneric: {fileID: 3565614770072619094, guid: a326ae2b5e7666d4c970a3f07a0d0b47, type: 3}
+  FarmingCardGeneric: {fileID: 7533610789197845844, guid: a35152abef392bc45b58d4ee71513951, type: 3}
   MaxHand: 3
-  HandPosition: {x: -3, y: -3, z: 0}
+  HandPosition: {x: 0, y: -3, z: 0}
 --- !u!1 &415097724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,7 +1532,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2359,7 +2359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 507, y: -253}
+  m_AnchoredPosition: {x: -543.34, y: -30}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2128848494

@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour
     private void TileMovement()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this._mainCamera.transform.position.z));
         Vector3Int gridPos = TileMaps[TileMapType.GRASS.ToInt()].WorldToCell(mousePos);
         if(TileMaps[0].HasTile(gridPos))
         {

@@ -25,21 +25,22 @@ public class FarmingHand : MonoBehaviour
     {
         // Vector3 previousPosition = HandPosition;
 
-        int ACC = 0;
+        int ACC = -MaxHand/2;
         for(int i = 0; i < MaxHand; i++)
         {
             FarmingCard card = Instantiate<FarmingCard>(FarmingCardGeneric);
+            card.transform.parent = this.gameObject.transform;
             card.GetComponent<Transform>().localPosition = new Vector3(ACC, HandPosition.y);
             CurrentHand.Add(card);
-
+            ACC += 2;
             //Really simple POC code... needs changing.
 
-            if(ACC == 0)
-                ACC += 2;
-            else if(ACC > 0)
-                ACC = -ACC;
-            else if(ACC < 0)
-                ACC = +ACC;
+            //if(ACC == 0)
+            //    ACC += 2;
+            //else if(ACC > 0)
+            //    ACC = -ACC;
+            //else if(ACC < 0)
+            //    ACC = +ACC;
         }
     }
 }
