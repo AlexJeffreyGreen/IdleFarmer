@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
     //Farmer Player
     public FarmerPlayer Player1; //TODO - Dream to implement lobby and multiplayer
 
+    public float CameraOffset;
+
     private void Awake()
     {
 
@@ -143,11 +145,15 @@ public class GameManager : MonoBehaviour
 
     private void TileMovement()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, this._mainCamera.transform.position.z));
-        Vector3Int gridPos = TileMaps[TileMapType.GRASS.ToInt()].WorldToCell(mousePos);
+        Vector3 tileLocation = Input.mousePosition;
+        Ray screenWorldToRay = Camera.main.ScreenPointToRay(tileLocation);
+        Vector3 worldPoint = screenWorldToRay.GetPoint(-screenWorldToRay.origin.z / screenWorldToRay.direction.z);
+        worldPoint = new Vector3(worldPoint.x - CameraOffset, worldPoint.y - CameraOffset, worldPoint.z);
+        Vector3Int gridPos = TileMaps[TileMapType.GRASS.ToInt()].WorldToCell(worldPoint);
+
         if(TileMaps[0].HasTile(gridPos))
         {
+
             ManageSelectedTileAtPosition(gridPos);
 
 
@@ -187,11 +193,12 @@ public class GameManager : MonoBehaviour
                 //clear?
             }
 
-           // ManageCanvasMainTile(gridPos);
+            // ManageCanvasMainTile(gridPos);
         }
         else
         {
-            TileMaps[TileMapType.SELECTOR.ToInt()].ClearAllTiles();
+            //We should temp store the previous tile position so it looks less janky
+            //TileMaps[TileMapType.SELECTOR.ToInt()].ClearAllTiles();
         }
     }
 
