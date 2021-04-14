@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     //Farmer Player
     public FarmerPlayer Player1; //TODO - Dream to implement lobby and multiplayer
+    public StaminaBarManager StaminaBarManager;
 
     public float CameraOffset;
 
@@ -135,6 +136,10 @@ public class GameManager : MonoBehaviour
         else
         {
             TileMovement();
+            if(Input.GetKeyDown(KeyCode.A))
+                this.StaminaBarManager.RemoveStamina(10);
+            else if(Input.GetKeyDown(KeyCode.S))
+                this.StaminaBarManager.AddStamina(10);
         }
     }
 
