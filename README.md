@@ -1,5 +1,5 @@
-# IdleFarmer
-Idle Farming Game
+# Lazy Farmer
+Lazy Farming Game
 
 ![grass_resize_smaller](https://user-images.githubusercontent.com/9258988/114639459-ee7d8700-9c9b-11eb-9285-64a42fb65226.png)
 
