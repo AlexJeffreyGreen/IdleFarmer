@@ -34,7 +34,7 @@ namespace Assets.Scripts.SeedManager
             }
             catch(Exception e)
             {
-
+                Debug.Log(e);
             }
             return seeds;
         }

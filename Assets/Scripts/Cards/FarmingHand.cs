@@ -29,7 +29,7 @@ public class FarmingHand : MonoBehaviour
         for(int i = 0; i < MaxHand; i++)
         {
             FarmingCard card = Instantiate<FarmingCard>(FarmingCardGeneric);
-            card.transform.parent = this.gameObject.transform;
+            card.transform.SetParent(this.gameObject.transform);
             card.GetComponent<Transform>().localPosition = new Vector3(ACC, HandPosition.y);
             CurrentHand.Add(card);
             ACC += 2;

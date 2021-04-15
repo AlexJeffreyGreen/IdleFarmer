@@ -30,7 +30,7 @@ public class StaminaBarManager : MonoBehaviour
                     node = Instantiate<StaminaBarNode>(MainNode, new Vector3(this.transform.position.x + i * Spacing, this.transform.position.y, 0), Quaternion.identity);
                 }
 
-                node.transform.parent = this.transform;
+                node.transform.SetParent(this.transform);
                 StaminaBar.AddLast(node);
             }
         }
