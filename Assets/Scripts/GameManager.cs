@@ -54,9 +54,9 @@ public class GameManager : MonoBehaviour
 
     //Farmer Player
     public FarmerPlayer Player1; //TODO - Dream to implement lobby and multiplayer
-    public StaminaBar StaminaBar;
-    public int MaxStamina = 100;
-    public int CurrentStamina;
+    //public StaminaBar StaminaBar;
+    //public int MaxStamina = 100;
+    //public int CurrentStamina;
     
     public float CameraOffset;
 
@@ -92,8 +92,8 @@ public class GameManager : MonoBehaviour
         //Deserialize seed collection
         //build up seed bag
 
-        CurrentStamina = MaxStamina;
-        StaminaBar.SetMaxStamina(CurrentStamina);
+        //CurrentStamina = MaxStamina;
+        //StaminaBar.SetMaxStamina(CurrentStamina);
     }
 
     private void IncrementDay()
@@ -140,30 +140,22 @@ public class GameManager : MonoBehaviour
         else
         {
             TileMovement();
-            if (Input.GetKeyDown(KeyCode.A))
+            /*if (Input.GetKeyDown(KeyCode.A))
             {
                 Debug.Log("Pressed A");
-                StaminaTest(-20);
+                //StaminaTest(-20);
                 //this.StaminaBarManager.RemoveStamina(-50);
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
                 Debug.Log("Pressed S");
-                StaminaTest(20);
+                //StaminaTest(20);
                 //this.StaminaBarManager.AddStamina(50);
-            }
+            }*/
         }
     }
 
-    public void StaminaTest(int stamina)
-    {
-        CurrentStamina += stamina;
-        if (CurrentStamina > MaxStamina)
-            CurrentStamina = MaxStamina;
-        else if (CurrentStamina <= 0)
-            CurrentStamina = 0;
-        StaminaBar.SetStamina(CurrentStamina);
-    }
+ 
         
     private void LateUpdate()
     {

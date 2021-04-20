@@ -1826,7 +1826,7 @@ MonoBehaviour:
   DayCount: 0
   completedDay: 1
   Tiles:
-  - {fileID: 11400000, guid: 2e15e48e0ac62a64996c99cea8773174, type: 2}
+  - {fileID: 11400000, guid: ddf71e3c91a292141ba37ce98f9d12e6, type: 2}
   - {fileID: 11400000, guid: c14e40d34b016e843ba05e3452195b6a, type: 2}
   - {fileID: 11400000, guid: 6b24c075f41606c4ba27293224a7eda5, type: 2}
   TileMaps:
@@ -2680,7 +2680,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d9262466859e8fd45ab3f25a80c28f15, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3043332d2a3d0934a8621802cecfb80f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

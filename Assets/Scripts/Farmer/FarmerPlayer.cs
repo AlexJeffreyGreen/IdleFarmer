@@ -2,6 +2,9 @@
 using Assets.Scripts.Farmer.Backpack;
 using System.Collections;
 using System.Collections.Generic;
+using Farmer.Action;
+using Farmer.Action.Farming;
+using Farmer.Action.Stamina;
 using UnityEngine;
 
 public class FarmerPlayer : MonoBehaviour
@@ -20,21 +23,31 @@ public class FarmerPlayer : MonoBehaviour
             this._backpack = BackpackFactory.Create<SmallBackpack>();
 
         CurrentStamina = MaxStamina;
-
-        StaminaBar.SetMaxStamina((MaxStamina));
+        StaminaBar.SetMaxStamina(MaxStamina);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown((KeyCode.Space)))
-            this.StaminaTest(20);
+        if (Input.GetKeyDown((KeyCode.A)))
+            this.FarmingActionTaken(ActionFactory.Create<FarmTile>());
+            //this.UpdateStamina(-20);
+        else if (Input.GetKeyDown(KeyCode.S))
+            this.FarmingActionTaken(ActionFactory.Create<ReplenishStamina>());
+            //this.UpdateStamina(20);
+        
     }
 
-    void StaminaTest(int stamina)
+    void UpdateStamina(int stamina)
     {
         //if(CurrentStamina)
-        CurrentStamina -= stamina;
+        CurrentStamina += stamina;
         StaminaBar.SetStamina((CurrentStamina));
+    }
+
+    public void FarmingActionTaken(ActionBase action)
+    {
+        Debug.Log($"Action Offset = {action.GetActionStaminaOffSet()}");
+        this.UpdateStamina(action.GetActionStaminaOffSet());
     }
 }
