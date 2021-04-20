@@ -13,20 +13,22 @@ public class StaminaBarNode : MonoBehaviour
         _currentStaminaPoints = MaxStamina;
     }
 
-    public int RetrieveStamina() { return this._currentStaminaPoints; }
-    public void UpdateStamina(int ACC)
+    public int CurrentStamina => this._currentStaminaPoints;
+
+    public void UpdateStamina(int acc)
     {
-        if(ACC >= MaxStamina)
+        if(acc >= MaxStamina)
         {
             this._currentStaminaPoints = this.MaxStamina;
         }
-        else if(this._currentStaminaPoints + ACC <= MinStamina)
+        else if(this._currentStaminaPoints + acc <= MinStamina)
         {
             this._currentStaminaPoints = this.MinStamina;
         }
         else
-            this._currentStaminaPoints += ACC;
+            this._currentStaminaPoints += acc;
     }
+
    
 
 

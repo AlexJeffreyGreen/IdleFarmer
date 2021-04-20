@@ -54,8 +54,10 @@ public class GameManager : MonoBehaviour
 
     //Farmer Player
     public FarmerPlayer Player1; //TODO - Dream to implement lobby and multiplayer
-    public StaminaBarManager StaminaBarManager;
-
+    public StaminaBar StaminaBar;
+    public int MaxStamina = 100;
+    public int CurrentStamina;
+    
     public float CameraOffset;
 
     private void Awake()
@@ -90,6 +92,8 @@ public class GameManager : MonoBehaviour
         //Deserialize seed collection
         //build up seed bag
 
+        CurrentStamina = MaxStamina;
+        StaminaBar.SetMaxStamina(CurrentStamina);
     }
 
     private void IncrementDay()
@@ -110,7 +114,7 @@ public class GameManager : MonoBehaviour
 
         _mainCamera.transform.position = new Vector3(0, 2.5f, _mainCamera.transform.position.z);
 
-        InvokeRepeating("CheckTilesDaily", 2.0f, 15.0f);
+        //InvokeRepeating("CheckTilesDaily", 2.0f, 15.0f);
     }
 
     private void CreateNewTileAt(TileType type, int x, int y, int z = 0)
@@ -136,13 +140,31 @@ public class GameManager : MonoBehaviour
         else
         {
             TileMovement();
-            if(Input.GetKeyDown(KeyCode.A))
-                this.StaminaBarManager.RemoveStamina(10);
-            else if(Input.GetKeyDown(KeyCode.S))
-                this.StaminaBarManager.AddStamina(10);
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Debug.Log("Pressed A");
+                StaminaTest(-20);
+                //this.StaminaBarManager.RemoveStamina(-50);
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                Debug.Log("Pressed S");
+                StaminaTest(20);
+                //this.StaminaBarManager.AddStamina(50);
+            }
         }
     }
 
+    public void StaminaTest(int stamina)
+    {
+        CurrentStamina += stamina;
+        if (CurrentStamina > MaxStamina)
+            CurrentStamina = MaxStamina;
+        else if (CurrentStamina <= 0)
+            CurrentStamina = 0;
+        StaminaBar.SetStamina(CurrentStamina);
+    }
+        
     private void LateUpdate()
     {
         
