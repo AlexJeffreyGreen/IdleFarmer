@@ -33,11 +33,7 @@ namespace Assets.Scripts.SeedManager
             {
                 lock(_lock)
                 {
-                    if(seedManager == null)
-                    {
-                        seedManager = new SeedManager();
-                    }
-                    return seedManager;
+                    return seedManager ?? (seedManager = new SeedManager());
                 }
             }
         }
@@ -88,6 +84,11 @@ namespace Assets.Scripts.SeedManager
 
             return allTiles.ToArray();
             //throw new NotImplementedException();
+        }
+
+        public void GetTileAtMouseButton()
+        {
+            
         }
     }
 }

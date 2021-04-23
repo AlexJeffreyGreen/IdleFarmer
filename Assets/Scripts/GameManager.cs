@@ -8,7 +8,9 @@ using Assets.Scripts.SmartTiles;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using Farmer.Action;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -43,8 +45,13 @@ public class GameManager : MonoBehaviour
    
     //CURRENT GRID POSITION
     private Vector3Int _currentPos;
+    public Vector3Int GetCurrentPos
+    {
+        get { return this._currentPos; }
+    }
     public Vector3Int CurrentPosition { get { return this._currentPos; } }
 
+    public Vector3Int CurrentMousePostion;
     //EXTRAS
     public System.Random Random;
     public TileType TileType;
@@ -140,18 +147,8 @@ public class GameManager : MonoBehaviour
         else
         {
             TileMovement();
-            /*if (Input.GetKeyDown(KeyCode.A))
-            {
-                Debug.Log("Pressed A");
-                //StaminaTest(-20);
-                //this.StaminaBarManager.RemoveStamina(-50);
-            }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                Debug.Log("Pressed S");
-                //StaminaTest(20);
-                //this.StaminaBarManager.AddStamina(50);
-            }*/
+            
+            
         }
     }
 
@@ -162,56 +159,38 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void TileMovement()
+    public bool isMouseOverTile()
     {
         Vector3 tileLocation = Input.mousePosition;
         Ray screenWorldToRay = Camera.main.ScreenPointToRay(tileLocation);
         Vector3 worldPoint = screenWorldToRay.GetPoint(-screenWorldToRay.origin.z / screenWorldToRay.direction.z);
         worldPoint = new Vector3(worldPoint.x - CameraOffset, worldPoint.y - CameraOffset, worldPoint.z);
-        Vector3Int gridPos = TileMaps[TileMapType.GRASS.ToInt()].WorldToCell(worldPoint);
-
-        if(TileMaps[0].HasTile(gridPos))
+        CurrentMousePostion = TileMaps[TileMapType.GRASS.ToInt()].WorldToCell(worldPoint);
+        return TileMaps[0].HasTile(CurrentMousePostion);
+    }
+    
+    private void TileMovement()
+    {
+        if(isMouseOverTile())
         {
 
-            ManageSelectedTileAtPosition(gridPos);
-
-
-            if(Input.GetMouseButtonDown(0))
+            ManageSelectedTileAtPosition(CurrentMousePostion);
+            if (Input.GetMouseButtonDown(0))
             {
-                if(!TileMaps[TileMapType.TILLED.ToInt()].HasTile(gridPos))
-                {
-                    Debug.Log($"Adding Tile at Position... {gridPos}");
+                GrassTile newTile = SmartTileFactory.Create<GrassTile>(CurrentMousePostion, Tiles[TileType.GRASSHIGHLIGHTED.ToInt()]);
+                TileMaps[TileMapType.TILLED.ToInt()].SetTile(CurrentMousePostion, null);
+                TileMaps[TileMapType.TILLED.ToInt()].SetTile(CurrentMousePostion, newTile.GetTile());
+            }
 
-                    GrassTile tile = SmartTileFactory.Create<GrassTile>(gridPos, Tiles[TileType.TILLED.ToInt()]);
-                    this.SeedingTiles.TileCollection.Add(Guid.NewGuid(), tile);
-                    TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, tile.GetTile());
-                }
-                else
-                {
-                    KeyValuePair<Guid, SmartTileBase> tileAtPosition = this.SeedingTiles.GetTileAtPosition(gridPos);
-                    if(tileAtPosition.Key != Guid.Empty && tileAtPosition.Value != null)
-                    {
-                        Debug.Log($"Removing Tile at Position... {gridPos}");
-                        SeedingTiles.TileCollection.Remove(tileAtPosition.Key);
-                        TileMaps[TileMapType.TILLED.ToInt()].SetTile(gridPos, null);
-                    }
-                }
-
-                this.ManageCanvasMainTile(gridPos);
-
-
-                KeyValuePair<Guid, SmartTileBase> keyValuePair = this._farmGrassTiles.GetTileAtPosition(gridPos);
-                if(keyValuePair.Key != Guid.Empty && keyValuePair.Value != null)
-                {
-                    Debug.Log($"Found Tile at Position {gridPos} - Id - {keyValuePair.Key}");
-                    Debug.Log(keyValuePair.Value.GetTile().name);
-                }
+           /* if(Input.GetMouseButtonDown(0))
+            {
+                HandleTileClick();
             }
             else
             {
                 //clear?
             }
-
+            */
             // ManageCanvasMainTile(gridPos);
         }
         else
@@ -221,14 +200,43 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void HandleTileClick(Vector3Int clickedPosition)
+    {
+        if (!TileMaps[TileMapType.TILLED.ToInt()].HasTile(clickedPosition))
+        {
+            Debug.Log($"Adding Tile at Position... {clickedPosition}");
+
+            GrassTile tile = SmartTileFactory.Create<GrassTile>(clickedPosition, Tiles[TileType.TILLED.ToInt()]);
+            this.SeedingTiles.TileCollection.Add(Guid.NewGuid(), tile);
+            TileMaps[TileMapType.TILLED.ToInt()].SetTile(clickedPosition, tile.GetTile());
+        }
+        else
+        {
+            KeyValuePair<Guid, SmartTileBase> tileAtPosition = this.SeedingTiles.GetTileAtPosition(clickedPosition);
+            if (tileAtPosition.Key != Guid.Empty && tileAtPosition.Value != null)
+            {
+                Debug.Log($"Removing Tile at Position... {clickedPosition}");
+                SeedingTiles.TileCollection.Remove(tileAtPosition.Key);
+                TileMaps[TileMapType.TILLED.ToInt()].SetTile(clickedPosition, null);
+            }
+        }
+
+        this.ManageCanvasMainTile(clickedPosition);
+
+
+        KeyValuePair<Guid, SmartTileBase> keyValuePair = this._farmGrassTiles.GetTileAtPosition(clickedPosition);
+        if (keyValuePair.Key != Guid.Empty && keyValuePair.Value != null)
+        {
+            Debug.Log($"Found Tile at Position {clickedPosition} - Id - {keyValuePair.Key}");
+            Debug.Log(keyValuePair.Value.GetTile().name);
+        }
+    }
+
     private void ManageCanvasMainTile(Vector3Int gridPos)
     {
-        //this.MainTileImage;
         this.SeedTileImage = this.SeedTileImage.GetComponent<Image>();
         this.MainTileImage = this.MainTileImage.GetComponent<Image>();
-        //TileBase currentTile = TileMaps[TileMapType.GRASS.ToInt()].GetTile(gridPos);
-        //if(this._currentPos != gridPos)
-        //{
+
         KeyValuePair<Guid, SmartTileBase> tileAtPosition = SeedingTiles.GetTileAtPosition(gridPos);
         if(tileAtPosition.Key != Guid.Empty && tileAtPosition.Value != null)
         {
@@ -240,10 +248,9 @@ public class GameManager : MonoBehaviour
         {
             this.SeedTileImage.sprite = this.MainTileImage.sprite;
         }
-        //}
     }
 
-    private void ManageSelectedTileAtPosition(Vector3Int gridPos)
+    public void ManageSelectedTileAtPosition(Vector3Int gridPos)
     {
         if(this._currentPos != gridPos)
         {
@@ -252,12 +259,11 @@ public class GameManager : MonoBehaviour
             this.ManageCanvasMainTile(gridPos);
 
             this._currentPos = gridPos;
-
-
         }
 
         TileMaps[TileMapType.SELECTOR.ToInt()].SetTile(gridPos, Tiles[TileType.SELECTOR.ToInt()]);
     }
+    
 
     private void MenuProcessing() { }
 
@@ -344,5 +350,28 @@ public class GameManager : MonoBehaviour
         }
         else
             return;
+    }
+
+
+    public void SpendActionButtonClick()
+    {
+        Debug.Log("Button clicked.");
+        StartCoroutine("test");
+    }
+
+    IEnumerator test()
+    {
+        while (ActionQueue.ActionQueueManager.Count > 0)
+        {
+            ActionBase action = ActionQueue.ActionQueueManager.DequeueAction();
+            TileMaps[TileMapType.TILLED.ToInt()].SetTile(action.GetPosition(), null);
+            this.Player1.FarmingActionTaken(action);
+            
+            //GrassTile newTile = SmartTileFactory.Create<GrassTile>(CurrentMousePostion, Tiles[TileType.GRASS.ToInt()]);
+            //TileMaps[TileMapType.GRASS.ToInt()].SetTile(action.GetPosition(), null);
+
+            
+            yield return new WaitForSeconds(1);
+        }
     }
 }

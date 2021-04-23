@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Plants;
+using UnityEngine;
 
 namespace Farmer.Action.Stamina
 {
@@ -9,6 +10,8 @@ namespace Farmer.Action.Stamina
             
         }
 
+        protected override Seed Seed { get; }
+
         public override int GetActionStaminaOffSet()
         {
             return 100;
@@ -17,6 +20,6 @@ namespace Farmer.Action.Stamina
         protected override string Name { get; }
         protected override int ActionStaminaOffset { get; }
         protected override float[] Percentages { get; }
-        protected override Sprite[] Sprites { get; }
+        //protected override Sprite[] Sprites { get; }
     }
 }

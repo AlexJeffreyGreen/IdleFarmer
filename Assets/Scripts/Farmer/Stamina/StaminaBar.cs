@@ -9,8 +9,12 @@ public class StaminaBar : MonoBehaviour
     // Start is called before the first frame update
     public void SetStamina(int stamina)
     {
-        Slider.value = stamina;
-        //this.StaminaAmount.text = "TEST";
+        if (stamina > Slider.maxValue)
+            Slider.value = Slider.maxValue;
+        else if (stamina < Slider.minValue)
+            Slider.value = Slider.minValue;
+        else
+            Slider.value = stamina;
         this.SetText();
     }
     

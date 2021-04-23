@@ -10,7 +10,8 @@ namespace Assets.Scripts
     {
         GRASS = 0,
         TILLED,
-        SELECTOR
+        SELECTOR,
+        GRASSHIGHLIGHTED
     }
 
     public enum TileMapType

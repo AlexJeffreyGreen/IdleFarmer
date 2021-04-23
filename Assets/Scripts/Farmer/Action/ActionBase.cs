@@ -1,4 +1,5 @@
 ﻿using System.Data.Common;
+using Assets.Scripts.Plants;
 using UnityEngine;
 
 namespace Farmer.Action
@@ -9,7 +10,7 @@ namespace Farmer.Action
         protected abstract string Name { get; }
         protected abstract int ActionStaminaOffset { get; }
         protected  abstract  float[] Percentages { get; }
-        protected  abstract Sprite[] Sprites { get; }
+        protected  abstract Seed Seed { get; }
 
         public virtual int GetActionStaminaOffSet()
         {
@@ -20,7 +21,10 @@ namespace Farmer.Action
         //public float[] Percentages;
         //public Sprite[] Sprites;
         //private Vector2Int GridPosition;
-        
+        public Vector3Int GetPosition()
+        {
+            return this.GridPosition;
+        }
         public ActionBase(Vector3Int gridLocation)
         {
             this.GridPosition = gridLocation;
