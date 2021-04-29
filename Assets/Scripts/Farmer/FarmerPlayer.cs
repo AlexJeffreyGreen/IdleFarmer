@@ -16,7 +16,7 @@ public class FarmerPlayer : MonoBehaviour
     public int CurrentStamina;
     public StaminaBar StaminaBar;
 
-    public GameManager GameManager;
+    //public GameManager GameManager;
     private Vector3Int previousPosition;
     
     // Start is called before the first frame update
@@ -32,9 +32,9 @@ public class FarmerPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && this.GameManager.isMouseOverTile())
+        if (Input.GetMouseButtonDown(0) && GameManager.instance.IsMouseOverTile())
         {
-            Vector3Int currentPos = this.GameManager.GetCurrentPos;
+            Vector3Int currentPos = GameManager.instance.GetCurrentPosition();
 
             if (!ActionQueue.ActionQueueManager.AnyAtPosition(currentPos))
             {
@@ -56,10 +56,10 @@ public class FarmerPlayer : MonoBehaviour
 
     public void FarmingActionTaken(ActionBase action)
     {
-        Debug.Log($"Action Offset = {action.GetActionStaminaOffSet()}");
-        Debug.Log($"Action at Position {action.GetPosition()}");
-        this.UpdateStamina(action.GetActionStaminaOffSet());
-        if(action is FarmTile)
-            GameManager.HandleTileClick(action.GetPosition());
+        //Debug.Log($"Action Offset = {action.GetActionStaminaOffSet()}");
+        //Debug.Log($"Action at Position {action.GetPosition()}");
+        //this.UpdateStamina(action.GetActionStaminaOffSet());
+        //if(action is FarmTile)
+        //    GameManager.HandleTileClick(action.GetPosition());
     }
 }

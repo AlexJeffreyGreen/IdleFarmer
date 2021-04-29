@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1744588870099085311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5871558969058773641}
+  - component: {fileID: 3219335834509106775}
+  - component: {fileID: 8273908312656681620}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5871558969058773641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744588870099085311}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 827.0488, y: 415.96198, z: -5.8082952}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3219335834509106775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744588870099085311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0667ffb42f5f7b248920c32229c3035d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainGrid: {fileID: 1654199482271345558, guid: 65979ef1240a5a149828d31d970f643b, type: 3}
+  tileMapPrefabs:
+  - {fileID: 7060422917868518618, guid: 00cc79b8264e00040b496fb42529a1ef, type: 3}
+  - {fileID: 7935411529554222223, guid: b545096b3f8e4d541b51723e95df8c6a, type: 3}
+  - {fileID: 7313053373424625035, guid: 99df5a71a5ee33045b932f64fc4b28bd, type: 3}
+  MainGrassTile: {fileID: 11400000, guid: ddf71e3c91a292141ba37ce98f9d12e6, type: 2}
+  MainSelectorTile: {fileID: 11400000, guid: 6b24c075f41606c4ba27293224a7eda5, type: 2}
+  MainSelectionTile: {fileID: 11400000, guid: 66761c6362b7bb44585c7a3ac7cf778e, type: 2}
+  xVar: 10
+  yVar: 10
+  _mainCameraOffset_X: -2.5
+  _mainCameraOffset_Y: 2.5
+--- !u!114 &8273908312656681620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744588870099085311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff8987d8d8041acbba05d9f84b402ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 1744588870099085311}
