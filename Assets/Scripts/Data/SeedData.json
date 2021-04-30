@@ -50,11 +50,21 @@
 
     },
     {
-      "Name": "Selector",
+      "Name": "Selection",
       "SeedSprites": [
         {
           "Id": 0,
           "Path": "\\Assets\\Sprites\\selection.png"
+        }
+      ]
+
+    },
+    {
+      "Name": "Selected",
+      "SeedSprites": [
+        {
+          "Id": 0,
+          "Path": "\\Assets\\Sprites\\selected.png"
         }
       ]
 

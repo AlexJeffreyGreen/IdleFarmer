@@ -12,7 +12,7 @@ namespace Assets.Scripts.SeedManager
 {
     public class SeedDeserializer
     {
-        public Dictionary<Guid, PlantBase> PlantObjects = new Dictionary<Guid, PlantBase>();
+        //public Dictionary<Guid, PlantBase> PlantObjects = new Dictionary<Guid, PlantBase>();
         private TextAsset textFile;
 
         public SeedDeserializer()

@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6418463827085857352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8646053450358375495}
+  - component: {fileID: 2831721406259411694}
+  m_Layer: 0
+  m_Name: TileMapManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8646053450358375495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418463827085857352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 901.80304, y: 403.0506, z: -109.178444}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2831721406259411694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418463827085857352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e26543736f4bc8b9a391c5165e7820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainGrid: {fileID: 1654199482271345558, guid: 65979ef1240a5a149828d31d970f643b, type: 3}
+  GrassTile: {fileID: 11400000, guid: ecc47bb6a4466114394f94ccb719254b, type: 2}
+  SelectionTile: {fileID: 11400000, guid: ae2c36660e2fdaa4ab3f9327b0e7000c, type: 2}
+  SelectedTile: {fileID: 11400000, guid: 66761c6362b7bb44585c7a3ac7cf778e, type: 2}
+  _tileMapPrefabs:
+  - {fileID: 7060422917868518618, guid: 00cc79b8264e00040b496fb42529a1ef, type: 3}
+  - {fileID: 7935411529554222223, guid: b545096b3f8e4d541b51723e95df8c6a, type: 3}
+  - {fileID: 7313053373424625035, guid: 99df5a71a5ee33045b932f64fc4b28bd, type: 3}
+  xVar: 10
+  yVar: 10
+  _farmableObject: {fileID: -6688698071241642537, guid: 9d445137da95bc74e8a3d7cc96ed1a9a, type: 3}
+  _mainCameraOffset_X: -2
+  _mainCameraOffset_Y: 2

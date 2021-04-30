@@ -32,7 +32,7 @@ public class FarmerPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && GameManager.instance.IsMouseOverTile())
+        /*if (Input.GetMouseButtonDown(0) && GameManager.instance.IsMouseOverTile())
         {
             Vector3Int currentPos = GameManager.instance.GetCurrentPosition();
 
@@ -44,7 +44,7 @@ public class FarmerPlayer : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.S))
         {
             ActionQueue.ActionQueueManager.EnqueueAction(ActionFactory.Create<ReplenishStamina>());
-        }
+        }*/
     }
 
     void UpdateStamina(int stamina)

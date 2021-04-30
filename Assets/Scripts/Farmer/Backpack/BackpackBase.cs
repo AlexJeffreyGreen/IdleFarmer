@@ -26,7 +26,7 @@ namespace Assets.Scripts.Farmer.Backpack
             {
                 //List<Seed> seedList = new List<Seed>();
                 _seeds = new List<Seed>();
-                _seeds.AddRange(SeedManager.SeedManager.Manager.SeedCollection.Seed); //TEST
+//                _seeds.AddRange(SeedManager.SeedManager.instance.SeedCollection.Seed); //TEST
                 //return new List<Seed>();
             }
             return _seeds;
