@@ -34,6 +34,7 @@ namespace Assets.Scripts.Utilities.TileManagement
         [SerializeField] private FarmableObject _farmableObject;
         //[SerializeField] private GameObject _farmableGameObject;
         [HideInInspector] public List<Tilemap> Tilemaps;
+        public Dictionary<Vector3Int,FarmableObject> FarmableObjects;
         private Vector3Int _previousPosition;
         
         [Header("Camera and Offsets")] 
@@ -53,12 +54,13 @@ namespace Assets.Scripts.Utilities.TileManagement
 
             _mainCamera = Camera.main;
             Tilemaps = new List<Tilemap>();
+            FarmableObjects = new Dictionary<Vector3Int, FarmableObject>();
             this.TilemapInstantiation();
             this.UI_Tiles = SeedManager.SeedManager.instance.allUITiles;
             this.Seed_Tiles = SeedManager.SeedManager.instance.allSeedTiles;
-            //this.GrassTile = this.UI_Tiles.First(x => x.name == "Grass");
-            //this.SelectionTile = this.UI_Tiles.First(x => x.name == "Selection");
-            //this.SelectedTile = this.UI_Tiles.First(x => x.name == "Selected");
+            this.GrassTile = this.UI_Tiles.First(x => x.name == "Grass");
+            this.SelectionTile = this.UI_Tiles.First(x => x.name == "Selection");
+            this.SelectedTile = this.UI_Tiles.First(x => x.name == "Selected");
             _previousPosition = new Vector3Int(-1, -1, 0);
 
             //throw new NotImplementedException();
@@ -102,26 +104,47 @@ namespace Assets.Scripts.Utilities.TileManagement
         {
             //DrawLocationAtMouse(this.Tilemaps[0]);
             Vector3Int locationAtMouse = LocationAtMouse(this.Tilemaps[0]);
-            this.HighlightTileAtPosition(locationAtMouse, this.Tilemaps[0], this.Tilemaps[1]);
+            this.HighlightTileAtPosition(locationAtMouse, this.Tilemaps[0], this.Tilemaps[3]);
 
             if (Input.GetMouseButtonDown(0)
                 && this.Tilemaps[0].HasTile(locationAtMouse))
             {
-                Tilemaps[Tilemaps.Count - 1].SetTile(locationAtMouse, SelectedTile);
-                this.HandleLazyTileSelection(this.Tilemaps[this.Tilemaps.Count - 1], locationAtMouse);
+                this.Tilemaps[1].SetTile(locationAtMouse, UI_Tiles.First(x=>x.name == "Tilled"));
+                //Tilemaps[Tilemaps.Count - 1].SetTile(locationAtMouse, SelectedTile);
+                this.HandleLazyTileSelection(this.Tilemaps[2], locationAtMouse);
             }
         }
 
         private void HandleLazyTileSelection(Tilemap tM, Vector3Int newPosition)
         {
-            //TOOD - Prevent duplication if tilemap already has a lazy tile at position
-            LazyTileBase b = ScriptableObject.CreateInstance<LazyTileBase>();
-            b.sprite = this.SelectedTile.sprite;//this._tiles[0].sprite;
-            b._farmableObject = Instantiate(this._farmableObject);
-            b._farmableObject.transform.SetParent(this.transform);
-            b._farmableObject.Position = newPosition;
-            b.Init(newPosition);
-            tM.SetTile(newPosition, b);
+            //TODO - Fix this garbage, make it a nice method that does some elegant stuff with tile generation.
+            //Need to possibly refactor the tile generation code.
+            if (!tM.HasTile(newPosition))
+            {
+                tM.SetTile(newPosition,this.Seed_Tiles.First());
+                // LazyTileBase b = ScriptableObject.CreateInstance<LazyTileBase>();
+                // b.sprite = this.Seed_Tiles.First().sprite;// null;//this.SelectedTile.sprite; //this._tiles[0].sprite;
+                // b._farmableObject = Instantiate(this._farmableObject);
+                // b._farmableObject.transform.SetParent(this.transform);
+                // b._farmableObject.Position = newPosition;
+                // b.Init(newPosition);
+                // tM.SetTile(newPosition, b);
+                // tM.RefreshTile(newPosition);
+            }
+            else
+            {
+                tM.SetTile(newPosition, null);
+                tM.SetTile(newPosition, this.Seed_Tiles[1]);
+            }
+
+            if (!FarmableObjects.ContainsKey(newPosition))
+            {
+                FarmableObject farmableObject = Instantiate(this._farmableObject);
+                farmableObject.Position = newPosition; // redundant
+                farmableObject.transform.SetParent(this.transform);
+                FarmableObjects.Add(newPosition, farmableObject);
+            }
+            
         }
         
         public void HighlightTileAtPosition(Vector3Int locationAtMouse, Tilemap mainMap, Tilemap highLightMap)

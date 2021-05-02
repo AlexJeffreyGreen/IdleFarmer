@@ -50,9 +50,12 @@ MonoBehaviour:
   _tileMapPrefabs:
   - {fileID: 7060422917868518618, guid: 00cc79b8264e00040b496fb42529a1ef, type: 3}
   - {fileID: 7935411529554222223, guid: b545096b3f8e4d541b51723e95df8c6a, type: 3}
-  - {fileID: 7313053373424625035, guid: 99df5a71a5ee33045b932f64fc4b28bd, type: 3}
+  - {fileID: 7935411529554222223, guid: b545096b3f8e4d541b51723e95df8c6a, type: 3}
+  - {fileID: 1302795247071314096, guid: 51bce6fd2d0551f44b1ea45ab01f48a6, type: 3}
+  - {fileID: 1302795247071314096, guid: 51bce6fd2d0551f44b1ea45ab01f48a6, type: 3}
   xVar: 10
   yVar: 10
   _farmableObject: {fileID: -6688698071241642537, guid: 9d445137da95bc74e8a3d7cc96ed1a9a, type: 3}
+  Tilemaps: []
   _mainCameraOffset_X: -2
   _mainCameraOffset_Y: 2

@@ -9,6 +9,8 @@ namespace Assets.Scripts.Plants
     public class FarmableObject : MonoBehaviour
     {
         public Vector3Int Position;
+        private int ACC;
+        //public Sprite[] TestSprites;
        //public Sprite s;
 
         private void Awake()
@@ -33,8 +35,17 @@ namespace Assets.Scripts.Plants
         private void Start()
         {
             Debug.Log(Position);
+            
             // throw new NotImplementedException();
         }
+
+        public void MouseClickedOnTile()
+        {
+            Debug.Log($"You have clicked at {Position}");
+            //return this.RetrieveSprite();
+            //throw new NotImplementedException();
+        }
+        
 
         private void Update()
         {

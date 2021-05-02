@@ -96,4 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07d46864f804d15956b36a34277d1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  s: {fileID: 21300000, guid: 3043332d2a3d0934a8621802cecfb80f, type: 3}
+  Position: {x: 0, y: 0, z: 0}
+  TestSprites:
+  - {fileID: 21300000, guid: 2a7972570ef32ff44acb5e986d507215, type: 3}
+  - {fileID: 21300000, guid: c7e864d0b9da31140bd63a9f23c474aa, type: 3}
+  - {fileID: 21300000, guid: 1b24f5990db1a9244a96fd2a431a6b07, type: 3}

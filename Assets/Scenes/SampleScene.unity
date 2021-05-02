@@ -495,6 +495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1744588870099085311, guid: 24334bb4363a2f4449529ba0fd1d4e86, type: 3}
   mapManager: {fileID: 6418463827085857352, guid: 93733425881c82740bc61cc7a1ef74ab, type: 3}
+  seedManager: {fileID: 1382136691917294311, guid: 9cf59dbd3a7e5394f8b06d95226f9e5c, type: 3}
 --- !u!1 &538865276
 GameObject:
   m_ObjectHideFlags: 0
