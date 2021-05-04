@@ -62,13 +62,16 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    #region Mouse Movement Handlers
+    #region Canvas UI Management
 
-    public bool IsMouseOverTile()
+    public void OpenInventorySystemUI()
     {
-        return false;
+        Debug.Log("Opened Inventory.");
     }
+    
+
     #endregion
+    
     
     #region Action Queue Management
 

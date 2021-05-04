@@ -13,6 +13,7 @@ public class Loader : MonoBehaviour
     public GameObject gameManager;
     public GameObject mapManager;
     public GameObject seedManager;
+    public GameObject farmPlayer;
     //public SeedCollection SeedCollection;
     private void Awake()
     {
@@ -22,6 +23,8 @@ public class Loader : MonoBehaviour
             Instantiate(gameManager);
         if (TileMapManager.instance == null)
             Instantiate(mapManager);
+        if (FarmerPlayer.instance == null)
+            Instantiate(farmPlayer);
     }
     
     

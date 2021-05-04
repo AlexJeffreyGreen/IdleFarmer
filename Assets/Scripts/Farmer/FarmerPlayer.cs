@@ -2,6 +2,8 @@
 using Assets.Scripts.Farmer.Backpack;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Plants;
+using Assets.Scripts.SeedManager;
 using Farmer.Action;
 using Farmer.Action.Farming;
 using Farmer.Action.Stamina;
@@ -9,24 +11,34 @@ using UnityEngine;
 
 public class FarmerPlayer : MonoBehaviour
 {
+    public static FarmerPlayer instance = null;
     private BackpackBase _backpack;
     public BackpackBase Backpack { get { return this._backpack; } }
 
-    public int MaxStamina = 100;
-    public int CurrentStamina;
-    public StaminaBar StaminaBar;
-
-    //public GameManager GameManager;
-    private Vector3Int previousPosition;
+    private Seed SelectedSeed;
     
+    
+    
+    //public int MaxStamina = 100; 
+    //public int CurrentStamina;
+    //public StaminaBar StaminaBar;
+    //public GameManager GameManager;
+    //private Vector3Int previousPosition;
     // Start is called before the first frame update
     void Awake()
     {
         if(this._backpack == null)
             this._backpack = BackpackFactory.Create<SmallBackpack>();
 
-        CurrentStamina = MaxStamina;
-        StaminaBar.SetMaxStamina(MaxStamina);
+        if (instance == null)
+            instance = this;
+        else if (instance != null)
+            Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+
+        
+        //CurrentStamina = MaxStamina;
+        //StaminaBar.SetMaxStamina(MaxStamina);
     }
 
     // Update is called once per frame
@@ -45,14 +57,29 @@ public class FarmerPlayer : MonoBehaviour
         {
             ActionQueue.ActionQueueManager.EnqueueAction(ActionFactory.Create<ReplenishStamina>());
         }*/
+        
     }
 
-    void UpdateStamina(int stamina)
+
+
+    public void UpdateSelectedSeed(Seed s)
     {
-        //if(CurrentStamina)
-        CurrentStamina += stamina;
-        StaminaBar.SetStamina((CurrentStamina));
+        if(s != null)
+            this.SelectedSeed = s;
+        //do something more here!
     }
+
+    public Seed GetSelectedSeed()
+    {
+        return this.SelectedSeed;
+    }
+
+    // void UpdateStamina(int stamina)
+    // {
+    //     //if(CurrentStamina)
+    //     CurrentStamina += stamina;
+    //     StaminaBar.SetStamina((CurrentStamina));
+    // }
 
     public void FarmingActionTaken(ActionBase action)
     {

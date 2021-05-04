@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEditor.Search;
 
 namespace Assets.Scripts.Farmer.Backpack
 {
@@ -47,10 +48,23 @@ namespace Assets.Scripts.Farmer.Backpack
             return _seeds.Where(x => x.SeedType == type).Take(Quantity);
         }
 
-        public virtual Seed RetrieveSeed(SeedType type)
+        public virtual IEnumerable<Seed> RemoveSeed(SeedType type, int Quantity = 0)
         {
-            return _seeds.Where(x => x.SeedType == type).FirstOrDefault();
+            IEnumerable<Seed> seedsOfType = _seeds.Where(t => t.SeedType == type);
+            IEnumerable<Seed> seedsToRemove = null;
+            
+            if (seedsOfType.Count() < Quantity)
+                Quantity = seedsOfType.Count();
+
+            seedsOfType = seedsOfType.Take(Quantity);
+            seedsToRemove = seedsOfType;
+
+            _seeds = _seeds.Except(seedsOfType).ToList();
+            
+            return seedsToRemove;
         }
+        
+        
 
     }
 }
