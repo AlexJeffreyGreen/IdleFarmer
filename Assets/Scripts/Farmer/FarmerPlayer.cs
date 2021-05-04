@@ -2,6 +2,7 @@
 using Assets.Scripts.Farmer.Backpack;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Plants;
 using Assets.Scripts.SeedManager;
 using Farmer.Action;
@@ -57,7 +58,16 @@ public class FarmerPlayer : MonoBehaviour
         {
             ActionQueue.ActionQueueManager.EnqueueAction(ActionFactory.Create<ReplenishStamina>());
         }*/
-        
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            this.SelectedSeed = SeedManager.instance.SeedCollection.Seed.First();
+            this.Backpack.AddSeedToBackpack(SelectedSeed);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            this.Backpack.RemoveSeed(this.SelectedSeed.SeedType, 1);
+        }
     }
 
 

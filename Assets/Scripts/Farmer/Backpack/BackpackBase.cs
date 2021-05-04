@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEditor.Search;
+using UnityEngine;
 
 namespace Assets.Scripts.Farmer.Backpack
 {
     public abstract class BackpackBase
     {
-        //TODO implement factory for seeds??
         public abstract int MaxSeeds();
         private List<Seed> _seeds;
 
@@ -36,6 +36,7 @@ namespace Assets.Scripts.Farmer.Backpack
         public virtual void AddSeedToBackpack(Seed seed)
         {
             _seeds.Add(seed);
+            Debug.Log($"Added seed to backpack {seed.Name}. Total count {_seeds.Count}");
         }
 
         public virtual void AddSeedToBackpack(List<Seed> seedList)
@@ -59,8 +60,11 @@ namespace Assets.Scripts.Farmer.Backpack
             seedsOfType = seedsOfType.Take(Quantity);
             seedsToRemove = seedsOfType;
 
-            _seeds = _seeds.Except(seedsOfType).ToList();
+            foreach (Seed s in seedsToRemove)
+                _seeds.Remove(s);
             
+            //_seeds = _seeds.//_seeds.RemoveAll(x => x.seedsOfType);
+            Debug.Log($"Removed seeds of type {type} and in a quantity of {Quantity}. Total left of type - {_seeds.Select(x=>x.SeedType == type).Count()}");
             return seedsToRemove;
         }
         

@@ -8,12 +8,16 @@
             "Path": "\\Assets\\Sprites\\Plants\\Carrot_Sprout.png"
           },
           {
-            "Id": 0,
+            "Id": 1,
             "Path": "\\Assets\\Sprites\\Plants\\Carrot_Half.png"
           },
           {
-            "Id": 0,
+            "Id": 2,
             "Path": "\\Assets\\Sprites\\Plants\\Carrot.png"
+          },
+          {
+            "Id": 3,
+            "Path": "\\Assets\\Sprites\\Plants\\Carrot_Seed.png"
           }
         ]
       },

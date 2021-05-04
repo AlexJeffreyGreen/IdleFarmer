@@ -61,7 +61,7 @@ namespace Assets.Scripts.SeedManager
             {
                 for (int i = 0; i < uiTile.SeedSprites.Length; i++)
                 {
-                    Texture2D seedGestationTexture = new Texture2D(2, 2);
+                    /*Texture2D seedGestationTexture = new Texture2D(2, 2);
                     byte[] loadRaw = System.IO.File.ReadAllBytes(CurrentDirectroy + uiTile.SeedSprites[i].Path);
                     seedGestationTexture.LoadImage(loadRaw);
 
@@ -72,11 +72,11 @@ namespace Assets.Scripts.SeedManager
 
                     Vector2 seedGestationVector2 = new Vector2(0.5f, 0.5f);//Vector2.zero;
                     Sprite seedGestationSprite = Sprite.Create(seedGestationTexture, seedGestationRect,
-                        seedGestationVector2, 128.0f, 0, SpriteMeshType.Tight); // load sprite based on location in path?
+                        seedGestationVector2, 128.0f, 0, SpriteMeshType.Tight); // load sprite based on location in path?*/
                     
                     Tile seedGestationTile = ScriptableObject.CreateInstance<Tile>(); // new Tile();
                     seedGestationTile.name = $"{uiTile.Name}";
-                    seedGestationTile.sprite = seedGestationSprite;
+                    seedGestationTile.sprite = uiTile.SeedSprites[i].GetSprite();//seedGestationSprite;
                     allUITiles.Add(seedGestationTile);
                 }
             }
@@ -85,20 +85,20 @@ namespace Assets.Scripts.SeedManager
             {
                 for (int i = 0; i < seed.SpriteCollection.SeedSprites.Length; i++)
                 {
-                    Texture2D seedGestationTexture = new Texture2D(2, 2);
-                    byte[] loadRaw =
-                        System.IO.File.ReadAllBytes(CurrentDirectroy + seed.SpriteCollection.SeedSprites[i].Path);
-                    seedGestationTexture.LoadImage(loadRaw);
-
-                    Rect seedGestationRect =
-                        new Rect(0.0f, 0.0f, seedGestationTexture.width, seedGestationTexture.height);
-                    Vector2 seedGestationVector2 = new Vector2(0.5f, 0.5f);//Vector2.zero;
-                    Sprite seedGestationSprite = Sprite.Create(seedGestationTexture, seedGestationRect,
-                        seedGestationVector2, 128.0f, 0, SpriteMeshType.Tight); // load sprite based on location in path?
+                    // Texture2D seedGestationTexture = new Texture2D(2, 2);
+                    // byte[] loadRaw =
+                    //     System.IO.File.ReadAllBytes(CurrentDirectroy + seed.SpriteCollection.SeedSprites[i].Path);
+                    // seedGestationTexture.LoadImage(loadRaw);
+                    //
+                    // Rect seedGestationRect =
+                    //     new Rect(0.0f, 0.0f, seedGestationTexture.width, seedGestationTexture.height);
+                    // Vector2 seedGestationVector2 = new Vector2(0.5f, 0.5f);//Vector2.zero;
+                    // Sprite seedGestationSprite = Sprite.Create(seedGestationTexture, seedGestationRect,
+                    //     seedGestationVector2, 128.0f, 0, SpriteMeshType.Tight); // load sprite based on location in path?
 
                     Tile seedGestationTile = ScriptableObject.CreateInstance<Tile>(); // new Tile();
                     seedGestationTile.name = $"{seed.Name}_{seed.SpriteCollection.SeedSprites[i]}";
-                    seedGestationTile.sprite = seedGestationSprite;
+                    seedGestationTile.sprite = seed.SpriteCollection.SeedSprites[i].GetSprite();//seedGestationSprite;
                     allSeedTiles.Add(seedGestationTile);
                 }
             }
