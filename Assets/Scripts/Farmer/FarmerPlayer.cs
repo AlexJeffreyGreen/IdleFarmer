@@ -45,7 +45,12 @@ public class FarmerPlayer : MonoBehaviour
     private void TestingMethod()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            this.SelectedSeed = SeedManager.instance.SeedCollection.Seed.First();
+        {
+            this.SelectedSeed = SeedManager.instance.SeedCollection.Seed[testACC];
+            testACC++;
+            if (testACC > SeedManager.instance.SeedCollection.Seed.Length - 1)
+                testACC = 0;
+        }
         else if (Input.GetKeyDown(KeyCode.A))
         {
            Inventory.instance.AddInventoryItem(this.SelectedSeed.SeedType, 1);
