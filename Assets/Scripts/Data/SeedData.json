@@ -30,6 +30,37 @@
         "Name": "Vegetable"
       },
       "Name": "Carrot"
+    },
+    {
+      "SpriteCollection": {
+        "SeedSprites": [
+          {
+            "Id": 0,
+            "Path": "\\Assets\\Sprites\\Plants\\Radish_Sprout.png"
+          },
+          {
+            "Id": 1,
+            "Path": "\\Assets\\Sprites\\Plants\\Radish_Half.png"
+          },
+          {
+            "Id": 2,
+            "Path": "\\Assets\\Sprites\\Plants\\Radish.png"
+          },
+          {
+            "Id": 3,
+            "Path": "\\Assets\\Sprites\\Plants\\Radish_Seed.png"
+          }
+        ]
+      },
+      "Gestation_Period": 15,
+      "Price_Per_Seed": 2.0,
+      "Price_At_Harvest": 15.0,
+      "Percentage_Of_Lucky": 15.0,
+      "Tile_Size": 1,
+      "SeedType": {
+        "Name": "Vegetable"
+      },
+      "Name": "Radish"
     }
   ],
   "UI_Tile": [
@@ -58,7 +89,7 @@
       "SeedSprites": [
         {
           "Id": 0,
-          "Path": "\\Assets\\Sprites\\selection.png"
+          "Path": "\\Assets\\Sprites\\selection_tile.png"
         }
       ]
 

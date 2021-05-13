@@ -45,3 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCameraOffset_X: -2.5
   _mainCameraOffset_Y: 2.5
+  _backPackUIPrefab: {fileID: 3517607655115511788, guid: 7e6b274f1a958924da458063cfddf997, type: 3}

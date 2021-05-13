@@ -6,6 +6,7 @@ using Assets.Scripts.Plants;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Assets.Scripts.SeedManager;
+using Assets.Scripts.Utilities.TileManagement.Tiles;
 
 
 namespace Assets.Scripts.Utilities.TileManagement
@@ -16,6 +17,8 @@ namespace Assets.Scripts.Utilities.TileManagement
         public static TileMapManager instance = null;
         #endregion
 
+        [HideInInspector] public bool EnabledTileMap = true;
+
         [Header("Camera Properties")] 
         private Camera _mainCamera;
 
@@ -23,7 +26,7 @@ namespace Assets.Scripts.Utilities.TileManagement
         [SerializeField] private Grid _mainGrid;
         //[SerializeField] private Tile[] _tiles;
         private List<Tile> UI_Tiles;
-        private List<Tile> Seed_Tiles;
+        private List<LazyTile> Seed_Tiles;
         public Tile GrassTile;
         public Tile SelectionTile;
         public Tile SelectedTile;
@@ -48,10 +51,10 @@ namespace Assets.Scripts.Utilities.TileManagement
             else if (instance != null)
                 Destroy(gameObject);
             DontDestroyOnLoad(gameObject);
-            
-            
-            
 
+
+
+            EnabledTileMap = true; // TODO - Dumb
             _mainCamera = Camera.main;
             Tilemaps = new List<Tilemap>();
             FarmableObjects = new Dictionary<Vector3Int, FarmableObject>();
@@ -102,48 +105,91 @@ namespace Assets.Scripts.Utilities.TileManagement
 
         private void Update()
         {
-            //DrawLocationAtMouse(this.Tilemaps[0]);
-            Vector3Int locationAtMouse = LocationAtMouse(this.Tilemaps[0]);
-            this.HighlightTileAtPosition(locationAtMouse, this.Tilemaps[0], this.Tilemaps[3]);
-
-            if (Input.GetMouseButtonDown(0)
-                && this.Tilemaps[0].HasTile(locationAtMouse))
+            if (EnabledTileMap)
             {
-                this.Tilemaps[1].SetTile(locationAtMouse, UI_Tiles.First(x=>x.name == "Tilled"));
-                //Tilemaps[Tilemaps.Count - 1].SetTile(locationAtMouse, SelectedTile);
-                this.HandleLazyTileSelection(this.Tilemaps[2], locationAtMouse);
+                //DrawLocationAtMouse(this.Tilemaps[0]);
+                Vector3Int locationAtMouse = LocationAtMouse(this.Tilemaps[0]);
+                this.HighlightTileAtPosition(locationAtMouse, this.Tilemaps[0], this.Tilemaps[3]);
+
+                if (Input.GetMouseButtonDown(0)
+                    && this.Tilemaps[0].HasTile(locationAtMouse))
+                {
+
+                    //Tilemaps[Tilemaps.Count - 1].SetTile(locationAtMouse, SelectedTile);
+                    if (FarmerPlayer.instance.GetSelectedSeed() != null)
+                        this.HandleLazyTileSelection(this.Tilemaps[2], locationAtMouse);
+                }
             }
         }
 
         private void HandleLazyTileSelection(Tilemap tM, Vector3Int newPosition)
         {
-            //TODO - Fix this garbage, make it a nice method that does some elegant stuff with tile generation.
-            //Need to possibly refactor the tile generation code.
-            if (!tM.HasTile(newPosition))
+            
+            /*
+            Seed selectedSeed = FarmerPlayer.instance.GetSelectedSeed();
+            
+            if (selectedSeed == null)
+                return;
+            
+            FarmableObject currentFarmableObjectAtTile = null;
+            
+            List<LazyTile> allPossibleTilesGivenSelectedSeed = this.Seed_Tiles.Where(x => x.Seed == selectedSeed).ToList();
+
+            IEnumerable<Seed> seedsAvailable = FarmerPlayer.instance.Backpack.RetrieveSeedsByType(FarmerPlayer.instance.GetSelectedSeed().SeedType, 1);
+
+            bool hasTileAtPosition = tM.HasTile(newPosition);
+            
+            bool hasFarmableObjectAtPosition = FarmableObjects.ContainsKey(newPosition);
+            
+            
+            if (!seedsAvailable.Any())
             {
-                tM.SetTile(newPosition,this.Seed_Tiles.First());
-                // LazyTileBase b = ScriptableObject.CreateInstance<LazyTileBase>();
-                // b.sprite = this.Seed_Tiles.First().sprite;// null;//this.SelectedTile.sprite; //this._tiles[0].sprite;
-                // b._farmableObject = Instantiate(this._farmableObject);
-                // b._farmableObject.transform.SetParent(this.transform);
-                // b._farmableObject.Position = newPosition;
-                // b.Init(newPosition);
-                // tM.SetTile(newPosition, b);
-                // tM.RefreshTile(newPosition);
+                Debug.Log($"Seed of type {selectedSeed.SeedType} is empty. You cannot add anymore.");
+                return;
+            }
+
+            //till the soil
+            this.Tilemaps[1].SetTile(newPosition, UI_Tiles.First(x=>x.name == "Tilled"));
+
+            //Retrieve or create new farmable object
+            if (!hasFarmableObjectAtPosition)
+            {
+                currentFarmableObjectAtTile = Instantiate(this._farmableObject);
+                currentFarmableObjectAtTile.Position = newPosition; // redundant
+                currentFarmableObjectAtTile.transform.SetParent(this.transform);
+                currentFarmableObjectAtTile.Seed = selectedSeed;
+                currentFarmableObjectAtTile.CurrentTiles = allPossibleTilesGivenSelectedSeed.ToArray();
+                FarmableObjects.Add(newPosition, currentFarmableObjectAtTile);
+            }
+            else
+                currentFarmableObjectAtTile = FarmableObjects[newPosition];
+            
+
+            //Add or Update Current Tile at position
+            if (!hasTileAtPosition)
+            {
+                //tM.SetTile(newPosition, lazyT);
+                tM.SetTile(newPosition,currentFarmableObjectAtTile.GetCurrentTile());
+                FarmerPlayer.instance.Backpack.RemoveSeed(selectedSeed.SeedType, 1);
             }
             else
             {
-                tM.SetTile(newPosition, null);
-                tM.SetTile(newPosition, this.Seed_Tiles[1]);
+                LazyTile t = tM.GetTile(newPosition) as LazyTile;
+                if (t.Seed == currentFarmableObjectAtTile.Seed)
+                {
+                    tM.SetTile(newPosition, null);
+                    LazyTile nextTile = currentFarmableObjectAtTile.GetNextTile();
+                    if(nextTile != null)
+                        tM.SetTile(newPosition, nextTile);
+                }
+                else
+                {
+                    Debug.Log("Wrong seed on current tile v. selected tile.");
+                }
             }
+            */
 
-            if (!FarmableObjects.ContainsKey(newPosition))
-            {
-                FarmableObject farmableObject = Instantiate(this._farmableObject);
-                farmableObject.Position = newPosition; // redundant
-                farmableObject.transform.SetParent(this.transform);
-                FarmableObjects.Add(newPosition, farmableObject);
-            }
+
             
         }
         

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public struct StaminaValue
     public int whole;
     public int remainder;
 }
-
+[Obsolete]
 public class StaminaBarManager : MonoBehaviour
 {
     public int MaxSum;

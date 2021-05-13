@@ -30,8 +30,13 @@ public class GameManager : MonoBehaviour
     private Camera _mainCamera;
     [SerializeField] private float _mainCameraOffset_X;
     [SerializeField] private float _mainCameraOffset_Y;
-    
-    
+
+
+    [SerializeField] public bool UIEnabled; 
+
+   // [Header("UI")] 
+    //[SerializeField] private Canvas _backPackUIPrefab;
+   // [HideInInspector] public Canvas _backPackUI { get; set; }
     #endregion
     
     
@@ -44,15 +49,21 @@ public class GameManager : MonoBehaviour
         else if(instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+
+       // this._backPackUI.gameObject.SetActive(false);
     }
 
-    private void Start()
+    void Start()
     {
-     
+        //unity fucking sucks and can't figure out anything on its own
+//        this._backPackUI = Instantiate(_backPackUIPrefab);
+ //       this._backPackUI.transform.SetParent(this.transform);
+       // Debug.Log(this._backPackUI);
     }
 
     private void Update()
     {
+       // Debug.Log(this._backPackUI);
         if (Input.GetKey(KeyCode.Escape))
         {
             this.SaveAndExit();
@@ -64,10 +75,7 @@ public class GameManager : MonoBehaviour
 
     #region Canvas UI Management
 
-    public void OpenInventorySystemUI()
-    {
-        Debug.Log("Opened Inventory.");
-    }
+    
     
 
     #endregion

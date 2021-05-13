@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Assets.Scripts.Utilities.TileManagement;
+using Assets.Scripts.Utilities.TileManagement.Tiles;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -8,8 +9,48 @@ namespace Assets.Scripts.Plants
 {
     public class FarmableObject : MonoBehaviour
     {
+        public LazyTile[] CurrentTiles;
+
+
         public Vector3Int Position;
         private int ACC;
+
+        private Seed _seed;
+
+        private SpriteCollection _spriteCollection;
+
+        public Seed Seed
+        {
+            get
+            {
+                return this._seed;
+            }
+            set
+            {
+                this._seed = value;
+                this._spriteCollection = this._seed.SpriteCollection;
+            }
+        }
+
+        public LazyTile GetNextTile()
+        {
+            ACC++;
+            if (ACC > this.CurrentTiles.Length - 2)
+            {
+                ACC = 0;
+                return null;
+            }
+
+            LazyTile lazyTile = this.CurrentTiles[ACC];
+            return lazyTile;
+        }
+
+        public LazyTile GetCurrentTile()
+        {
+            return this.CurrentTiles[ACC];
+        }
+        
+
         //public Sprite[] TestSprites;
        //public Sprite s;
 

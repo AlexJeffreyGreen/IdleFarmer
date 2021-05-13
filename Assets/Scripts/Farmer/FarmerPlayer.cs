@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Farmer;
+﻿using System;
+using Assets.Scripts.Farmer;
 using Assets.Scripts.Farmer.Backpack;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,67 +10,51 @@ using Farmer.Action;
 using Farmer.Action.Farming;
 using Farmer.Action.Stamina;
 using UnityEngine;
+using Random = System.Random;
 
 public class FarmerPlayer : MonoBehaviour
 {
     public static FarmerPlayer instance = null;
-    private BackpackBase _backpack;
-    public BackpackBase Backpack { get { return this._backpack; } }
+    //private BackpackBase _backpack;
+   // public BackpackBase Backpack { get { return this._backpack; } }
+    private int testACC;
 
     private Seed SelectedSeed;
     
-    
-    
-    //public int MaxStamina = 100; 
-    //public int CurrentStamina;
-    //public StaminaBar StaminaBar;
-    //public GameManager GameManager;
-    //private Vector3Int previousPosition;
-    // Start is called before the first frame update
+
     void Awake()
     {
-        if(this._backpack == null)
-            this._backpack = BackpackFactory.Create<SmallBackpack>();
+      //  if(this._backpack == null)
+         //   this._backpack = BackpackFactory.Create<SmallBackpack>();
 
         if (instance == null)
             instance = this;
         else if (instance != null)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
-
         
-        //CurrentStamina = MaxStamina;
-        //StaminaBar.SetMaxStamina(MaxStamina);
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetMouseButtonDown(0) && GameManager.instance.IsMouseOverTile())
-        {
-            Vector3Int currentPos = GameManager.instance.GetCurrentPosition();
-
-            if (!ActionQueue.ActionQueueManager.AnyAtPosition(currentPos))
-            {
-                ActionQueue.ActionQueueManager.EnqueueAction(ActionFactory.Create<FarmTile>(currentPos));
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            ActionQueue.ActionQueueManager.EnqueueAction(ActionFactory.Create<ReplenishStamina>());
-        }*/
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            this.SelectedSeed = SeedManager.instance.SeedCollection.Seed.First();
-            this.Backpack.AddSeedToBackpack(SelectedSeed);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            this.Backpack.RemoveSeed(this.SelectedSeed.SeedType, 1);
-        }
+        //TODO - Only temporary
+        TestingMethod();
     }
 
+    private void TestingMethod()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            this.SelectedSeed = SeedManager.instance.SeedCollection.Seed.First();
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+           Inventory.instance.AddInventoryItem(this.SelectedSeed.SeedType, 1);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            Inventory.instance.RemoveInventoryItem(this.SelectedSeed.SeedType, 1);
+        }
+    }
 
 
     public void UpdateSelectedSeed(Seed s)
