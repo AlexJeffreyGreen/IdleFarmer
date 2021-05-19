@@ -1,118 +1,70 @@
 {
   "Seed": [
     {
-      "SpriteCollection": {
-        "SeedSprites": [
-          {
-            "Id": 0,
-            "Path": "\\Assets\\Sprites\\Plants\\Carrot_Sprout.png"
-          },
-          {
-            "Id": 1,
-            "Path": "\\Assets\\Sprites\\Plants\\Carrot_Half.png"
-          },
-          {
-            "Id": 2,
-            "Path": "\\Assets\\Sprites\\Plants\\Carrot.png"
-          },
-          {
-            "Id": 3,
-            "Path": "\\Assets\\Sprites\\Plants\\Carrot_Seed.png"
-          }
-        ]
-      },
       "Gestation_Period": 10,
       "Price_Per_Seed": 1.0,
       "Price_At_Harvest": 10.0,
       "Percentage_Of_Lucky": 10.0,
       "Tile_Size": 1,
+      "Path": "\\Assets\\Sprites\\Plants\\Carrot.png",
+      "NumberOfSprites": 4,
       "SeedType": {
         "Name": "Vegetable"
       },
       "Name": "Carrot"
     },
     {
-      "SpriteCollection": {
-        "SeedSprites": [
-          {
-            "Id": 0,
-            "Path": "\\Assets\\Sprites\\Plants\\Radish_Sprout.png"
-          },
-          {
-            "Id": 1,
-            "Path": "\\Assets\\Sprites\\Plants\\Radish_Half.png"
-          },
-          {
-            "Id": 2,
-            "Path": "\\Assets\\Sprites\\Plants\\Radish.png"
-          },
-          {
-            "Id": 3,
-            "Path": "\\Assets\\Sprites\\Plants\\Radish_Seed.png"
-          }
-        ]
-      },
       "Gestation_Period": 15,
       "Price_Per_Seed": 2.0,
       "Price_At_Harvest": 15.0,
       "Percentage_Of_Lucky": 15.0,
       "Tile_Size": 1,
+      "Path": "\\Assets\\Sprites\\Plants\\Radish.png",
+      "NumberOfSprites": 4,
       "SeedType": {
         "Name": "Vegetable"
       },
       "Name": "Radish"
+    },
+    {
+      "Gestation_Period": 15,
+      "Price_Per_Seed": 2.0,
+      "Price_At_Harvest": 15.0,
+      "Percentage_Of_Lucky": 15.0,
+      "Tile_Size": 1,
+      "Path": "\\Assets\\Sprites\\Plants\\Hops.png",
+      "NumberOfSprites": 6,
+      "SeedType": {
+        "Name": "Vegetable"
+      },
+      "Name": "Hops"
     }
   ],
   "UI_Tile": [
     {
       "Name": "Grass",
-      "SeedSprites": [
-        {
-          "Id": 0,
-          "Path": "\\Assets\\Sprites\\grass.png"
-        }
-      ]
-
+      "NumberOfSprites": 1,
+      "Path" : "\\Assets\\Sprites\\grass.png"
     },
     {
       "Name": "Tilled",
-      "SeedSprites": [
-        {
-          "Id": 0,
-          "Path": "\\Assets\\Sprites\\grass_tilled.png"
-        }
-      ]
-
+      "NumberOfSprites": 1,
+      "Path": "\\Assets\\Sprites\\grass_tilled.png"
     },
     {
       "Name": "Selection",
-      "SeedSprites": [
-        {
-          "Id": 0,
-          "Path": "\\Assets\\Sprites\\selection_tile.png"
-        }
-      ]
-
+      "NumberOfSprites": 1,
+      "Path": "\\Assets\\Sprites\\selection_tile.png"
     },
     {
       "Name": "Selected",
-      "SeedSprites": [
-        {
-          "Id": 0,
-          "Path": "\\Assets\\Sprites\\selected.png"
-        }
-      ]
-
+      "NumberOfSprites": 1,
+      "Path": "\\Assets\\Sprites\\selected.png"
     },
     {
       "Name": "Grass_Highlighted",
-      "SeedSprites": [
-        {
-          "Id": 0,
-          "Path": "\\Assets\\Sprites\\grass_highlighted.png"
-        }
-      ]
-
+      "NumberOfSprites": 1,
+      "Path": "\\Assets\\Sprites\\grass_highlighted.png"
     }
   ]
   }

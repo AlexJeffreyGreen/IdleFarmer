@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Plants;
 using UnityEngine;
 
-namespace Market
+namespace Assets.Scripts.Shop
 {
     [CreateAssetMenu(fileName = "MarketItem", menuName = "Market/MarketItemScriptable", order = 0)]
     public class MarketItemScriptable : ScriptableObject

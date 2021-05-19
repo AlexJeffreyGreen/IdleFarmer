@@ -2,6 +2,7 @@
 using System;
 using Assets.Scripts.Plants;
 using Assets.Scripts.SeedManager;
+using Assets.Scripts.Shop;
 using Assets.Scripts.Utilities;
 using Assets.Scripts.Utilities.TileManagement;
 using SaveSystem;
@@ -17,7 +18,8 @@ public class Loader : MonoBehaviour
     public GameObject farmPlayer;
     public GameObject saveManager;
     public GameObject inventory;
-
+    public GameObject market;
+    
     [SerializeField] private Texture2D _cursorSprite;
     //public SeedCollection SeedCollection;
     private void Awake()
@@ -33,8 +35,10 @@ public class Loader : MonoBehaviour
         if (SaveManager.instance == null)
             Instantiate(saveManager);
         if (Inventory.instance == null)
-            Instantiate(inventory);
-        
+            Instantiate(inventory); 
+        if (Market.instance == null)
+            Instantiate(market);
+
         Cursor.SetCursor(_cursorSprite, Vector2.zero, CursorMode.Auto);
         
     }

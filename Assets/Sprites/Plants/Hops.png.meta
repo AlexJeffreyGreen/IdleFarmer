@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: 1b24f5990db1a9244a96fd2a431a6b07
+guid: b0b094bb74e0bfb43a72ad3776a58fc0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5859083586626064994
-    second: Carrot_0
+      213: 5056484107349181033
+    second: Hops_0
   - first:
-      213: -2094157912208876536
-    second: Carrot_1
+      213: 42074864415457976
+    second: Hops_1
   - first:
-      213: -830467699528618894
-    second: Carrot_2
+      213: 7368240492079632984
+    second: Hops_2
   - first:
-      213: 3721053832486967156
-    second: Carrot_3
+      213: -7108521676818277278
+    second: Hops_3
+  - first:
+      213: -203514969684516049
+    second: Hops_4
+  - first:
+      213: -5183830299095993244
+    second: Hops_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -127,7 +133,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Carrot_0
+      name: Hops_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,14 +147,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9de4dd458a50bea0800000000000000
-      internalID: -5859083586626064994
+      spriteID: 962c4f6518d3c2640800000000000000
+      internalID: 5056484107349181033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Carrot_1
+      name: Hops_1
       rect:
         serializedVersion: 2
         x: 128
@@ -162,14 +168,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80c5733697e00f2e0800000000000000
-      internalID: -2094157912208876536
+      spriteID: 8b2c473cdda759000800000000000000
+      internalID: 42074864415457976
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Carrot_2
+      name: Hops_2
       rect:
         serializedVersion: 2
         x: 256
@@ -183,14 +189,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27c292cf6069974f0800000000000000
-      internalID: -830467699528618894
+      spriteID: 8525e0e50bf314660800000000000000
+      internalID: 7368240492079632984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Carrot_3
+      name: Hops_3
       rect:
         serializedVersion: 2
         x: 384
@@ -204,8 +210,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 477dd73eeb6d3a330800000000000000
-      internalID: 3721053832486967156
+      spriteID: 26c151f8235795d90800000000000000
+      internalID: -7108521676818277278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hops_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f23ea7d9638fc2df0800000000000000
+      internalID: -203514969684516049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hops_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 464f97edec55f08b0800000000000000
+      internalID: -5183830299095993244
       vertices: []
       indices: 
       edges: []

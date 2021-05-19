@@ -28,7 +28,7 @@ namespace Assets.Scripts.Plants
             set
             {
                 this._seed = value;
-                this._spriteCollection = this._seed.SpriteCollection;
+                //this._spriteCollection = this._seed.SpriteCollection;
             }
         }
 

@@ -21,11 +21,11 @@ public class Inventory : MonoBehaviour
     public BackpackType BackpackType;
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != null)
-            Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
+        // if (instance == null)
+        //     instance = this;
+        // else if (instance != null)
+        //     Destroy(gameObject);
+        // DontDestroyOnLoad(gameObject);
 
         Items = new List<InventoryItem>();
         this.GenerateBackpack();

@@ -52,22 +52,22 @@ namespace Assets.Scripts.SeedManager
 
             foreach (UI_Tile uiTile in SeedCollection.UI_Tile)
             {
-                for (int i = 0; i < uiTile.SeedSprites.Length; i++)
-                {
+                //for (int i = 0; i < uiTile.SeedSprites.Length; i++)
+                //{
                     Tile seedGestationTile = ScriptableObject.CreateInstance<LazyTile>(); // new Tile();
                     seedGestationTile.name = $"{uiTile.Name}";
-                    seedGestationTile.sprite = uiTile.SeedSprites[i].GetSprite();//seedGestationSprite;
+                    seedGestationTile.sprite = uiTile.GetSprite();//seedGestationSprite;
                     allUITiles.Add(seedGestationTile);
-                }
+                //}
             }
 
             foreach (Seed seed in SeedCollection.Seed)
             {
-                for (int i = 0; i < seed.SpriteCollection.SeedSprites.Length; i++)
+                for (int i = 0; i < seed.GetSprites().Count; i++)
                 {
                     LazyTile seedGestationTile = ScriptableObject.CreateInstance<LazyTile>(); // new Tile();
-                    seedGestationTile.name = $"{seed.Name}_{seed.SpriteCollection.SeedSprites[i]}";
-                    seedGestationTile.sprite = seed.SpriteCollection.SeedSprites[i].GetSprite();//seedGestationSprite;
+                    seedGestationTile.name = $"{seed.Name}_{seed.GetSprites()[i]}";
+                    seedGestationTile.sprite = seed.GetSprites()[i];//seedGestationSprite;
                     seedGestationTile.Seed = seed; 
                     allSeedTiles.Add(seedGestationTile);
                 }

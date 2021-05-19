@@ -64,7 +64,7 @@ namespace Assets.Scripts.Farmer.Backpack
                 this.MainButton.enabled = true;
                 this.MainButton.gameObject.GetComponent<Image>().enabled = true;
                 this.MainButton.gameObject.GetComponent<Image>().sprite = this._InventoryItemScriptable.Seed
-                    .SpriteCollection.SeedSprites.Last().GetSprite();
+                    .GetSprites().Last();
                 this.MainButton.gameObject.SetActive(true);
             }
         }

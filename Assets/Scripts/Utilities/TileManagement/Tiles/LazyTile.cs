@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Assets.Scripts.Plants;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,7 +11,7 @@ namespace Assets.Scripts.Utilities.TileManagement.Tiles
     {
         public int ACC;
 
-        private SpriteCollection _sprites;
+        private List<Sprite> _sprites;
 
         private Seed _seed;
         //public SpriteCollection Sprites;
@@ -20,7 +21,7 @@ namespace Assets.Scripts.Utilities.TileManagement.Tiles
             set
             {
                 this._seed = value;
-                this._sprites = this._seed.SpriteCollection;
+                this._sprites = this._seed.GetSprites();
             }
         }
 
@@ -28,7 +29,7 @@ namespace Assets.Scripts.Utilities.TileManagement.Tiles
         {
             if (this.sprite != null)
             {
-                this.sprite = this._sprites.SeedSprites[ACC].GetSprite();
+                this.sprite = this._sprites[ACC];
                 this.ACC++;
             }
         }
