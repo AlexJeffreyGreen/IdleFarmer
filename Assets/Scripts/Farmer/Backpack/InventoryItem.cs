@@ -69,6 +69,12 @@ namespace Assets.Scripts.Farmer.Backpack
             }
         }
 
+        public void SeedButtonClick()
+        {
+            Debug.Log($"Selected seed from inventory. {this._InventoryItemScriptable.Seed.Name}");
+            FarmerPlayer.instance.UpdateSelectedSeed(this._InventoryItemScriptable.Seed);
+        }
+
         //public void AddSeed(Seed seed, int Quantity)
         
 

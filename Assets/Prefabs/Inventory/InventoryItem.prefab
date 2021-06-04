@@ -275,13 +275,13 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 5286586078244955588}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3087148086374557368}
-        m_TargetAssemblyTypeName: Assets.Scripts.Utilities.InventoryItem, Assembly-CSharp
-        m_MethodName: SelectSeed
+        m_TargetAssemblyTypeName: Assets.Scripts.Farmer.Backpack.InventoryItem, Assembly-CSharp
+        m_MethodName: SeedButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -381,8 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d85691ff257428bbb4cbbe87be5217d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainColor: {r: 0, g: 0, b: 0, a: 0}
-  Quantity: 0
-  SeedSpriteContainer: {fileID: 0}
+  _InventoryItemScriptable: {fileID: 0}
   SpriteText: {fileID: 2687852029015637451}
   MainButton: {fileID: 7182923949702207245}

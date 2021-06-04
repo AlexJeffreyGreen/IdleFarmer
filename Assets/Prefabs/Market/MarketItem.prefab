@@ -302,3 +302,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _marketButton: {fileID: 7538341069847875928}
+  _marketItemQuantityText: {fileID: 7538341068685668634}

@@ -7,7 +7,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Assets.Scripts.SeedManager;
 using Assets.Scripts.Utilities.TileManagement.Tiles;
-
+using Assets.Scripts.Farmer.Action;
+using Assets.Scripts.Farmer.Action.FarmingActions;
 
 namespace Assets.Scripts.Utilities.TileManagement
 {
@@ -114,37 +115,58 @@ namespace Assets.Scripts.Utilities.TileManagement
                 if (Input.GetMouseButtonDown(0)
                     && this.Tilemaps[0].HasTile(locationAtMouse))
                 {
-
+                    Debug.Log($"Tile clicked. Selected tile {FarmerPlayer.instance.GetSelectedSeed()}");
                     //Tilemaps[Tilemaps.Count - 1].SetTile(locationAtMouse, SelectedTile);
-                    if (FarmerPlayer.instance.GetSelectedSeed() != null)
-                        this.HandleLazyTileSelection(this.Tilemaps[2], locationAtMouse);
+                    //if (FarmerPlayer.instance.GetSelectedSeed() != null)
+                    //    this.HandleLazyTileSelection(this.Tilemaps[2], locationAtMouse);
+                    //TillSoilAction newBasicAction = ScriptableObject
+                    //    .Instantiate<BasicAction>
+                    //    (FarmingActionManager.instance.BasicFarmingAction);
+
+
+                    IEnumerable<ActionBase> ActionsAtGridLocation = FarmingActionManager.instance.ActionsAtLocation(locationAtMouse);
+
+                    if(ActionsAtGridLocation.Count() > 0)
+                    {
+                        foreach(ActionBase baseA in ActionsAtGridLocation)
+                            Debug.Log(baseA.GetName());
+                    }
+
+                    TillSoilAction action = ActionFactory.Create<TillSoilAction>(locationAtMouse);
+                    FarmingActionManager.instance.EnqueueNewAction(action);
                 }
             }
         }
 
+
         private void HandleLazyTileSelection(Tilemap tM, Vector3Int newPosition)
         {
-            
-            /*
-            Seed selectedSeed = FarmerPlayer.instance.GetSelectedSeed();
-            
-            if (selectedSeed == null)
-                return;
-            
             FarmableObject currentFarmableObjectAtTile = null;
-            
+            Seed selectedSeed = FarmerPlayer.instance.GetSelectedSeed();
+
+            if(selectedSeed == null)
+                return;
+
             List<LazyTile> allPossibleTilesGivenSelectedSeed = this.Seed_Tiles.Where(x => x.Seed == selectedSeed).ToList();
 
-            IEnumerable<Seed> seedsAvailable = FarmerPlayer.instance.Backpack.RetrieveSeedsByType(FarmerPlayer.instance.GetSelectedSeed().SeedType, 1);
+            
 
             bool hasTileAtPosition = tM.HasTile(newPosition);
-            
             bool hasFarmableObjectAtPosition = FarmableObjects.ContainsKey(newPosition);
-            
+            //TODO - seems weird.
+
+            IEnumerable<Seed> seedsAvailable = 
+                Inventory.instance.Items.Where(x=>x._InventoryItemScriptable != null)
+                .Select(s=>s._InventoryItemScriptable)
+                .Where(x => x.Seed != null && x.Seed == selectedSeed)
+                .Select(z=>z.Seed);
+
+
+      
             
             if (!seedsAvailable.Any())
             {
-                Debug.Log($"Seed of type {selectedSeed.SeedType} is empty. You cannot add anymore.");
+                Debug.Log($"Seed of type {selectedSeed.Name} is empty. You cannot add anymore.");
                 return;
             }
 
@@ -170,7 +192,8 @@ namespace Assets.Scripts.Utilities.TileManagement
             {
                 //tM.SetTile(newPosition, lazyT);
                 tM.SetTile(newPosition,currentFarmableObjectAtTile.GetCurrentTile());
-                FarmerPlayer.instance.Backpack.RemoveSeed(selectedSeed.SeedType, 1);
+                Inventory.instance.RemoveInventoryItem(selectedSeed, 1);
+                //FarmerPlayer.instance.Backpack.RemoveSeed(selectedSeed.SeedType, 1);
             }
             else
             {
@@ -187,12 +210,12 @@ namespace Assets.Scripts.Utilities.TileManagement
                     Debug.Log("Wrong seed on current tile v. selected tile.");
                 }
             }
-            */
-
-
             
+
+
+
         }
-        
+
         public void HighlightTileAtPosition(Vector3Int locationAtMouse, Tilemap mainMap, Tilemap highLightMap)
         {
             if (mainMap.HasTile(locationAtMouse))

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Plants;
+using Assets.Scripts.Shop;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +19,7 @@ public class HighlightedSeed : MonoBehaviour
     [SerializeField] private Image SelectedSeedSprite;
     public List<Text> TextFields;
     public Button[] InteractableButtons;
+    public MarketItem item;
     
 
     private int amountToPurchaseText;
@@ -44,6 +47,7 @@ public class HighlightedSeed : MonoBehaviour
 
     public void InitializeHighlightedSeed(Seed s)
     {
+        this.item = Market.instance.GetMarketItem(s);
         this.Seed = s;
         this.SelectedSeedSprite.gameObject.SetActive(true);
         this.SelectedSeedSprite.sprite = s.GetSprites().Last();
@@ -52,6 +56,7 @@ public class HighlightedSeed : MonoBehaviour
         this.TextFields[2].text = $"{Seed.Gestation_Period}";
         this.TextFields[3].text = $"{Seed.Price_At_Harvest}";
         this.TextFields[4].text = "0";
+        this.amountToPurchaseText = 0;
         foreach (Button interactableButton in this.InteractableButtons)
         {
             interactableButton.enabled = true;
@@ -60,6 +65,11 @@ public class HighlightedSeed : MonoBehaviour
 
     public void AddSeedClick()
     {
+        if(item.Quantity < amountToPurchaseText)
+        {
+            Debug.Log("Cannot purchase anymore. Reached the max available of said seed in the market.");
+            return;
+        }
         amountToPurchaseText++;
         this.TextFields[4].text = amountToPurchaseText.ToString();
         Debug.Log("Add Click");
@@ -77,8 +87,31 @@ public class HighlightedSeed : MonoBehaviour
     public void PurchaseSeedClick()
     {
         Debug.Log($"Purchased: {amountToPurchaseText} Seeds");
+        int amountToBePurchased = Convert.ToInt32(amountToPurchaseText);
+        //Calculate total purchased.
+        decimal cost = amountToBePurchased * Convert.ToDecimal(Seed.Price_Per_Seed);
+        //Calculate if player has enough money
+        decimal amountPlayerHasInWallet = FarmerPlayer.instance.Wallet.Amount;
+        if(cost > amountPlayerHasInWallet)
+        {
+            Debug.Log("Far too much was requested to purchase.");
+            return;
+        }
+        //if not, make noise.
+
+        //if yes, revert values add to inventory.
+        else
+        {
+            FarmerPlayer.instance.Wallet.ModifyWallet(cost);
+            Inventory.instance.AddInventoryItem(Seed, amountToBePurchased);
+            Market.instance.UpdateMarketItem(Seed, -amountToBePurchased);
+        }
+
         amountToPurchaseText = 0;
         this.TextFields[4].text = amountToPurchaseText.ToString();
+
+
+
         Debug.Log("PurchaseSeedClick");
     }
 }

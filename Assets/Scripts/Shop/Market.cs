@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Farmer.Backpack;
 using Assets.Scripts.Plants;
 using Assets.Scripts.SeedManager;
@@ -14,12 +16,14 @@ namespace Assets.Scripts.Shop
         public HighlightedSeed HighlightedSeed;
         [SerializeField] private GridLayoutGroup _gridLayoutGroup;
         [SerializeField] private MarketItem _marketItem;
+        private List<MarketItem> marketItems;
         private void Awake()
         {
             if (instance == null)
                  instance = this;
 
             Instantiate(HighlightedSeed);
+            this.marketItems = new List<MarketItem>();
             // else if (instance != null)
             //     Destroy(gameObject);
             // DontDestroyOnLoad(gameObject);
@@ -35,7 +39,7 @@ namespace Assets.Scripts.Shop
                 Debug.Log($"Making a market item for {seed.Name}");
                 MarketItem i = Instantiate(_marketItem, this._gridLayoutGroup.transform);
                 i.InitMarketItem(seed, 100, Convert.ToDecimal(seed.Price_Per_Seed));
-                
+                this.marketItems.Add(i);
                 //InventoryItem i = Instantiate(_marketItem, this._scrollView.transform, false);
             }    
         }
@@ -43,6 +47,23 @@ namespace Assets.Scripts.Shop
         private void Update()
         {
             
+        }
+
+        public void UpdateMarketItem(Seed seed, int quantity)
+        {
+            MarketItem i = this.marketItems.FirstOrDefault(x => x.Seed == seed);
+            if(i == null)
+                return; //should not happen.
+            i.UpdateMarketItem(quantity);
+        }
+
+
+        public MarketItem GetMarketItem(Seed seed)
+        {
+            MarketItem i = this.marketItems.FirstOrDefault(x => x.Seed == seed);
+            if(i == null)
+                return null; //should not happen.
+            return i;
         }
     }
 }

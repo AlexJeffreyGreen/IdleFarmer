@@ -15,6 +15,7 @@ namespace Assets.Scripts.Shop
         private int _quantity;
        // private Market _market;
         [SerializeField] private Button _marketButton;
+        [SerializeField] private Text _marketItemQuantityText;
 
         private void Awake()
         {
@@ -26,7 +27,16 @@ namespace Assets.Scripts.Shop
             this._seed = seed;
             this._quantity = quantity;
             this._price_per_seed = price_per;
+            this._marketItemQuantityText.text = this._quantity.ToString();
             _marketButton.image.sprite = this._seed.GetSprites().Last();
+        }
+
+        public void UpdateMarketItem(int quantity)
+        {
+            this._quantity += quantity;
+            if(this._quantity < 0)
+                this._quantity = 0;
+            this._marketItemQuantityText.text = this._quantity.ToString();
         }
 
         public void HighlightSelectedSeedInUI()
@@ -40,19 +50,19 @@ namespace Assets.Scripts.Shop
             
         }
         
-        public int Quantity()
+        public int Quantity
         {
-            return this._quantity;
+            get { return this._quantity; }
         }
 
-        public Seed Seed()
+        public Seed Seed
         {
-            return this._seed;
+            get { return this._seed; }
         }
 
-        public decimal Price()
+        public decimal Price
         {
-            return this._price_per_seed;
+            get { return this._price_per_seed; }
         }
     }
 }

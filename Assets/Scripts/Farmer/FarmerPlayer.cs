@@ -7,10 +7,9 @@ using System.Linq;
 using Assets.Scripts.Plants;
 using Assets.Scripts.SeedManager;
 using Farmer.Action;
-using Farmer.Action.Farming;
-using Farmer.Action.Stamina;
 using UnityEngine;
 using Random = System.Random;
+using Assets.Scripts.Farmer.Action;
 
 public class FarmerPlayer : MonoBehaviour
 {
@@ -20,19 +19,19 @@ public class FarmerPlayer : MonoBehaviour
     private int testACC;
 
     private Seed SelectedSeed;
-    
+
+    public Wallet Wallet;
 
     void Awake()
     {
-      //  if(this._backpack == null)
-         //   this._backpack = BackpackFactory.Create<SmallBackpack>();
-
         if (instance == null)
             instance = this;
         else if (instance != null)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
-        
+
+        if(Wallet == null)
+            this.Wallet = new Wallet();
     }
 
     // Update is called once per frame
@@ -49,15 +48,24 @@ public class FarmerPlayer : MonoBehaviour
             this.SelectedSeed = SeedManager.instance.SeedCollection.Seed[testACC];
             testACC++;
             if (testACC > SeedManager.instance.SeedCollection.Seed.Length - 1)
-                testACC = 0;
+                testACC = 0; 
+            Debug.Log("Farmer player pressed space.");
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-           Inventory.instance.AddInventoryItem(this.SelectedSeed.SeedType, 1);
+           Inventory.instance.AddInventoryItem(this.SelectedSeed, 1);
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
-            Inventory.instance.RemoveInventoryItem(this.SelectedSeed.SeedType, 1);
+            Inventory.instance.RemoveInventoryItem(this.SelectedSeed, 1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            this.Wallet.ModifyWallet(-100);
+        }
+        else if (Input.GetKeyDown(KeyCode.X))
+        {
+            this.Wallet.ModifyWallet(100);
         }
     }
 

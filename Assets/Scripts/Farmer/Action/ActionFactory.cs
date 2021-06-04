@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Farmer.Action
+namespace Assets.Scripts.Farmer.Action
 {
     public class ActionFactory
     {

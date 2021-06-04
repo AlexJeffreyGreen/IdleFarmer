@@ -2,7 +2,7 @@
   "Seed": [
     {
       "Gestation_Period": 10,
-      "Price_Per_Seed": 1.0,
+      "Price_Per_Seed": 5.0,
       "Price_At_Harvest": 10.0,
       "Percentage_Of_Lucky": 10.0,
       "Tile_Size": 1,
@@ -15,7 +15,7 @@
     },
     {
       "Gestation_Period": 15,
-      "Price_Per_Seed": 2.0,
+      "Price_Per_Seed": 3.0,
       "Price_At_Harvest": 15.0,
       "Percentage_Of_Lucky": 15.0,
       "Tile_Size": 1,

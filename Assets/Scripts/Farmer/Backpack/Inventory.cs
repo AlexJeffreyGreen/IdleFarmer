@@ -21,11 +21,11 @@ public class Inventory : MonoBehaviour
     public BackpackType BackpackType;
     private void Awake()
     {
-        // if (instance == null)
-        //     instance = this;
-        // else if (instance != null)
-        //     Destroy(gameObject);
-        // DontDestroyOnLoad(gameObject);
+        if (instance == null)
+            instance = this;
+        else if (instance != null)
+            Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
 
         Items = new List<InventoryItem>();
         this.GenerateBackpack();
@@ -43,12 +43,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RemoveInventoryItem(SeedType seedType, int quantity)
+    public void RemoveInventoryItem(Seed seed, int quantity)
     {
         
         InventoryItem item = this.Items.LastOrDefault(x =>x._InventoryItemScriptable != null  
                                                           && x._InventoryItemScriptable.Seed != null 
-                                                          && x._InventoryItemScriptable.Seed.SeedType == seedType);
+                                                          && x._InventoryItemScriptable.Seed == seed);
         if (item == null)
         {
             Debug.Log("No more items to remove of seed type.");
@@ -69,7 +69,7 @@ public class Inventory : MonoBehaviour
 
     }
 
-    public void AddInventoryItem(SeedType seedType, int quantity)
+    public void AddInventoryItem(Seed seed, int quantity)
     {
         // if (!this.Items.Select(x => x._InventoryItemScriptable.Seed.SeedType).Contains(seedType))
         // {
@@ -83,7 +83,7 @@ public class Inventory : MonoBehaviour
 
         item = this.Items.FirstOrDefault(x =>x._InventoryItemScriptable != null  
                                              && x._InventoryItemScriptable.Seed != null 
-                                             && x._InventoryItemScriptable.Seed.SeedType == seedType
+                                             && x._InventoryItemScriptable.Seed == seed
                                              && x._InventoryItemScriptable.Capacity > x._InventoryItemScriptable.Quantity);
 
 
@@ -96,7 +96,7 @@ public class Inventory : MonoBehaviour
                 item._InventoryItemScriptable.Quantity = item._InventoryItemScriptable.Capacity;
                 item.ReinitSeedSlot();
                 if(leftOvers > 0)
-                    this.AddInventoryItem(seedType, leftOvers);
+                    this.AddInventoryItem(seed, leftOvers);
             }
             item.ReinitSeedSlot();
         }
@@ -111,7 +111,7 @@ public class Inventory : MonoBehaviour
 
             item._InventoryItemScriptable = ScriptableObject.Instantiate(this._inventoryItemTemplate);
             item._InventoryItemScriptable.Seed =
-                SeedManager.instance.SeedCollection.Seed.First(x => x.SeedType == seedType);
+                SeedManager.instance.SeedCollection.Seed.First(x => x == seed);
             item._InventoryItemScriptable.Quantity = quantity;
             item._InventoryItemScriptable.Capacity = this.BackpackType.SeedCapacity;
             item.ReinitSeedSlot();

@@ -36,7 +36,7 @@ namespace Assets.Scripts.Plants
             _sprites = new List<Sprite>();
             //List<Sprite> returnValue = new List<Sprite>();
             
-            string CurrentDirectroy = Directory.GetCurrentDirectory();
+            string CurrentDirectroy = Directory.GetCurrentDirectory(); //Use unity library to do this instead
             Texture2D seedGestationTexture = new Texture2D(2, 2);
             byte[] loadRaw =
                 System.IO.File.ReadAllBytes(CurrentDirectroy + Path);

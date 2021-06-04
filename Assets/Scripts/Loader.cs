@@ -7,7 +7,8 @@ using Assets.Scripts.Utilities;
 using Assets.Scripts.Utilities.TileManagement;
 using SaveSystem;
 using UnityEngine.Tilemaps;
-
+using Assets.Scripts.Utilities.DayAndWeather;
+using Assets.Scripts.Farmer.Action;
 
 public class Loader : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Loader : MonoBehaviour
     public GameObject saveManager;
     public GameObject inventory;
     public GameObject market;
+    public GameObject dayAndWeatherManager;
+    public GameObject farmingActionManager;
     
     [SerializeField] private Texture2D _cursorSprite;
     //public SeedCollection SeedCollection;
@@ -38,6 +41,10 @@ public class Loader : MonoBehaviour
             Instantiate(inventory); 
         if (Market.instance == null)
             Instantiate(market);
+        if(DayAndWeatherManager.instance == null)
+            Instantiate(dayAndWeatherManager);
+        if(FarmingActionManager.instance == null)
+            Instantiate(farmingActionManager);
 
         Cursor.SetCursor(_cursorSprite, Vector2.zero, CursorMode.Auto);
         
