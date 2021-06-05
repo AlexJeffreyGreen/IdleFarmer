@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e26543736f4bc8b9a391c5165e7820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnabledTileMap: 1
   _mainGrid: {fileID: 1654199482271345558, guid: 65979ef1240a5a149828d31d970f643b, type: 3}
   GrassTile: {fileID: 11400000, guid: ecc47bb6a4466114394f94ccb719254b, type: 2}
   SelectionTile: {fileID: 11400000, guid: ae2c36660e2fdaa4ab3f9327b0e7000c, type: 2}
@@ -53,8 +54,8 @@ MonoBehaviour:
   - {fileID: 7935411529554222223, guid: b545096b3f8e4d541b51723e95df8c6a, type: 3}
   - {fileID: 1302795247071314096, guid: 51bce6fd2d0551f44b1ea45ab01f48a6, type: 3}
   - {fileID: 1302795247071314096, guid: 51bce6fd2d0551f44b1ea45ab01f48a6, type: 3}
-  xVar: 10
-  yVar: 10
+  xVar: 8
+  yVar: 8
   _farmableObject: {fileID: -6688698071241642537, guid: 9d445137da95bc74e8a3d7cc96ed1a9a, type: 3}
   Tilemaps: []
   _mainCameraOffset_X: -2

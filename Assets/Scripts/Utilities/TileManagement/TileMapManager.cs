@@ -9,6 +9,7 @@ using Assets.Scripts.SeedManager;
 using Assets.Scripts.Utilities.TileManagement.Tiles;
 using Assets.Scripts.Farmer.Action;
 using Assets.Scripts.Farmer.Action.FarmingActions;
+using Assets.Scripts.Utilities.UI;
 
 namespace Assets.Scripts.Utilities.TileManagement
 {
@@ -32,6 +33,23 @@ namespace Assets.Scripts.Utilities.TileManagement
         public Tile SelectionTile;
         public Tile SelectedTile;
         [SerializeField] private Tilemap[] _tileMapPrefabs;
+        
+        //Semi hard coded nonsense
+        private Tilemap GrassMap
+        {
+            get { return this.Tilemaps.First(); }
+        }
+
+        private Tilemap SelectionMap
+        {
+            get
+            {
+                return this.Tilemaps[3];
+            }
+        }
+        
+        //end of semi hard coded nonsense
+        
         [SerializeField] private int xVar;
         [SerializeField] private int yVar;
 
@@ -108,28 +126,25 @@ namespace Assets.Scripts.Utilities.TileManagement
         {
             if (EnabledTileMap)
             {
-                //DrawLocationAtMouse(this.Tilemaps[0]);
-                Vector3Int locationAtMouse = LocationAtMouse(this.Tilemaps[0]);
-                this.HighlightTileAtPosition(locationAtMouse, this.Tilemaps[0], this.Tilemaps[3]);
+                //This is being called too many times.
+                //Need a fix for this, I need to not draw a tile if the mouse is over the position AND be allowed to highlight the tile to show the action.
+                Vector3Int locationAtMouse = LocationAtMouse(this.GrassMap);
+                //if(this.GrassMap.HasTile(locationAtMouse))
+                // todo only have this occur in situations where the farming is enabled.
+                // It is called every frame and is useless to call when not needed.
+                this.HighlightTileAtPosition(locationAtMouse);
 
                 if (Input.GetMouseButtonDown(0)
                     && this.Tilemaps[0].HasTile(locationAtMouse))
                 {
                     Debug.Log($"Tile clicked. Selected tile {FarmerPlayer.instance.GetSelectedSeed()}");
-                    //Tilemaps[Tilemaps.Count - 1].SetTile(locationAtMouse, SelectedTile);
-                    //if (FarmerPlayer.instance.GetSelectedSeed() != null)
-                    //    this.HandleLazyTileSelection(this.Tilemaps[2], locationAtMouse);
-                    //TillSoilAction newBasicAction = ScriptableObject
-                    //    .Instantiate<BasicAction>
-                    //    (FarmingActionManager.instance.BasicFarmingAction);
 
-
-                    IEnumerable<ActionBase> ActionsAtGridLocation = FarmingActionManager.instance.ActionsAtLocation(locationAtMouse);
+                    IEnumerable<KeyValuePair<ActionBase, FarmingActionUI>> ActionsAtGridLocation = FarmingActionManager.instance.ActionsAtLocation(locationAtMouse);
 
                     if(ActionsAtGridLocation.Count() > 0)
                     {
-                        foreach(ActionBase baseA in ActionsAtGridLocation)
-                            Debug.Log(baseA.GetName());
+                        foreach(KeyValuePair<ActionBase, FarmingActionUI> baseA in ActionsAtGridLocation)
+                            Debug.Log(baseA.Key.GetName());
                     }
 
                     TillSoilAction action = ActionFactory.Create<TillSoilAction>(locationAtMouse);
@@ -216,8 +231,19 @@ namespace Assets.Scripts.Utilities.TileManagement
 
         }
 
-        public void HighlightTileAtPosition(Vector3Int locationAtMouse, Tilemap mainMap, Tilemap highLightMap)
+        /// <summary>
+        /// This function is called to check to see if the tile at the position of the mouse should be highlighted or not.
+        /// </summary>
+        /// <param name="locationAtMouse"></param>
+        /// <param name="mainMap"></param>
+        /// <param name="highLightMap"></param>
+        public void HighlightTileAtPosition(Vector3Int locationAtMouse, Tilemap mainMap = null, Tilemap highLightMap = null)
         {
+            if (mainMap == null)
+                mainMap = this.GrassMap;
+            if (highLightMap == null)
+                highLightMap = this.SelectionMap;
+            
             if (mainMap.HasTile(locationAtMouse))
             {
                 if (locationAtMouse != _previousPosition)

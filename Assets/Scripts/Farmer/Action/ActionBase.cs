@@ -1,27 +1,29 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using Assets.Scripts.Plants;
+using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.Farmer.Action
 {
     public abstract class ActionBase
     {
+        private Guid _id;
+
+        public Guid Id
+        {
+            get
+            {
+                if (_id == Guid.Empty)
+                    _id = Guid.NewGuid();
+                return _id;
+            }
+        }
+
         protected Vector3Int GridPosition { get; }
         protected abstract string Name { get; }
         protected Seed Seed { get; }
-        //protected abstract int ActionStaminaOffset { get; }
-        //protected  abstract  float[] Percentages { get; }
-        //protected  abstract Seed Seed { get; }
 
-        //public virtual int GetActionStaminaOffSet()
-        //{
-        //    return 0;
-       // }
-        //public string ActionName;
-        //public int ActionStaminaOffset;
-        //public float[] Percentages;
-        //public Sprite[] Sprites;
-        //private Vector2Int GridPosition;
         public string GetName()
         {
             return this.Name;

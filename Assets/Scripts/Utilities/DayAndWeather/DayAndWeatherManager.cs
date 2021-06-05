@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assets.Scripts.Farmer.Action;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ namespace Assets.Scripts.Utilities.DayAndWeather
         [SerializeField] private Text WeatherReportInfo;
         [SerializeField] private int DayCount = 1;
         [SerializeField] private Button SpendActionButton;
-        private bool spendActionDisabled = false;
+        //private bool spendActionDisabled = false;
         private Weather currentWeather;
 
         private void Awake()
@@ -72,18 +73,38 @@ namespace Assets.Scripts.Utilities.DayAndWeather
 
         public void IncrementDayAndProcessActions()
         {
-
+            //make async
             DayCount++;
             ProcessRandomEvents();
             //UpdateWalletInfo(0.00m);
             this.currentWeather = (Weather)(typeof(Weather).GetRandomEnumValue());
             UpdateWeatherReportInfo(this.currentWeather);
             UpdateDayInfo(this.DayCount);
+            DequeueAllActions();
         }
 
         private void ProcessRandomEvents()
         {
 
         }
+
+        private void DequeueAllActions()
+        {
+            this.ChangeStateOfDequeueActionButton();
+            FarmingActionManager.instance.DequeueActionsAsync();
+        }
+
+        public void ChangeStateOfDequeueActionButton()
+        {
+            this.SpendActionButton.enabled = !this.SpendActionButton.enabled;
+            if (!this.SpendActionButton.enabled)
+                this.SpendActionButton.GetComponentInChildren<Text>().text = "Processing Actions";
+            else
+                this.SpendActionButton.GetComponentInChildren<Text>().text = "Start Day";
+            Debug.Log($"Action button is - {this.SpendActionButton.enabled}");
+        }
+        
+
+
     }
 }

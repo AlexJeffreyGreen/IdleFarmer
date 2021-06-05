@@ -1,4 +1,6 @@
 ﻿using System;
+using Assets.Scripts.Farmer.Action.FarmingActions;
+using Assets.Scripts.Plants;
 using UnityEngine;
 
 namespace Assets.Scripts.Farmer.Action
@@ -17,6 +19,12 @@ namespace Assets.Scripts.Farmer.Action
         {
             _outputType = typeof(T);
             return (T) Activator.CreateInstance(typeof(T), gridPosition);
+        }
+
+        public static T Create<T>(Vector3Int gridPosition, Seed seed) where T : ActionBase
+        {
+            _outputType = typeof(T);
+            return (T) Activator.CreateInstance(typeof(T), gridPosition, seed);
         }
     }
 }

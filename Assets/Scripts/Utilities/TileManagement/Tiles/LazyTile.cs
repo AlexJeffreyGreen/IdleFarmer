@@ -10,10 +10,26 @@ namespace Assets.Scripts.Utilities.TileManagement.Tiles
     public class LazyTile : Tile
     {
         public int ACC;
-
+        private int dayCount;
+        private int _gestationPeriod;
+        private List<int> _gestationArray;
+        private void CalculateGestationInformation()
+        {
+            this._gestationPeriod = this._seed.Gestation_Period;
+            //TODO calculate gestations
+            int temp = this._gestationPeriod / (this._seed.NumberOfSprites - 1);
+            this._gestationArray = new List<int>();
+            for (int i = 0; i < this._gestationPeriod; i += temp)
+            {
+                this._gestationArray.Add(i);
+            }
+        }
+        
         private List<Sprite> _sprites;
 
         private Seed _seed;
+
+        private bool _watered;
         //public SpriteCollection Sprites;
         public Seed Seed
         {
@@ -22,16 +38,34 @@ namespace Assets.Scripts.Utilities.TileManagement.Tiles
             {
                 this._seed = value;
                 this._sprites = this._seed.GetSprites();
+                this.CalculateGestationInformation();
             }
         }
 
         public void UpdateTile()
         {
-            if (this.sprite != null)
+            if (this._seed != null)
             {
-                this.sprite = this._sprites[ACC];
-                this.ACC++;
+                if (_watered)
+                {
+                    if (this._gestationArray.Contains(this.dayCount))
+                    {
+                        if (this.sprite != null)
+                        {
+                            this.sprite = this._sprites[ACC];
+                            this.ACC++;
+                        }
+                    }
+
+                    this.dayCount++;
+                    this.ToggleWatered();
+                }
             }
+        }
+
+        public void ToggleWatered()
+        {
+            this._watered = !this._watered;
         }
         
     }
